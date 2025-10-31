@@ -1,0 +1,351 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/tokens' as *;
+
+// 스크롤 애니메이션
+.animateIn {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animateOut {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+.home {
+  min-height: 100vh;
+}
+
+// 히어로 섹션
+.hero {
+  position: relative;
+  width: 100%;
+  height: 819px; // 기본 높이 819px
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.heroContent {
+  width: min(100% - 2rem, 1280px);
+  margin: 0 auto;
+  padding-left: 2rem;
+}
+
+.heroText {
+  max-width: 600px;
+  color: white;
+}
+
+.heroTitle {
+  @include font-medium(xl);
+}
+
+.heroBrand {
+  font-size: fluid(32, 48);
+  font-weight: 900;
+  margin: 0 0 s(3);
+  line-height: 1.1;
+  animation: doubleScale 4s ease-in-out infinite;
+  transform-origin: center center; // 정확히 중앙에서 확대
+  display: inline-block; // 인라인 블록으로 설정하여 제자리 유지
+}
+
+@keyframes doubleScale {
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.1);
+  }
+  20% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.1);
+  }
+  40% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1); // 40%부터 100%까지 쉬는 구간
+  }
+}
+
+.heroDescription {
+  @include font-normal(sm);
+}
+
+.heroSubDescription {
+  font-size: fluid(14, 18);
+  font-weight: 300;
+  margin: 0 0 s(6);
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+.ctaButton {
+  background: $button-primary;
+  color: white;
+  border: none;
+  padding: s(4) s(6);
+  border-radius: 8px;
+  font-size: fluid(16, 18);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 9999px;
+  width: 165px;
+  margin-top: 32px;
+
+  &:hover {
+    background: $button-primary-hover;
+    transform: translateY(-2px);
+  }
+}
+
+// 상품 카테고리 섹션
+.travelGoods {
+  background: white;
+  padding: 4rem 0;
+}
+
+.travelGoodsContent {
+  width: min(100% - 2rem, 1280px);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+// 데스크탑에서는 스크롤 버튼이 오른쪽에
+@media (min-width: 768px) {
+  .scrollButton {
+    order: 1;
+  }
+}
+
+.goodsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: s(6);
+  flex: 1;
+}
+
+.travelGoodsItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: s(2);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.travelGoodsIcon {
+  font-size: 32px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  
+  .travelGoodsItem:hover & {
+    background: #e9ecef;
+    border-color: #dee2e6;
+  }
+}
+
+.travelGoodsText {
+  color: #333;
+  transition: color 0.2s ease;
+  @include font-medium(xs); 
+
+  .travelGoodsItem:hover & {
+    color: #000;
+  }
+}
+
+.scrollButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: #f8f9fa;
+    transform: translateY(-2px);
+  }
+}
+
+// 반응형 디자인
+// XL 브레이크포인트에서는 550px 높이
+@include mq(xl) {
+  .hero {
+    height: 550px;
+  }
+}
+
+@include mq(md) {
+  .heroContent {
+    padding-left: 4rem;
+  }
+  
+  .heroText {
+    max-width: 700px;
+  }
+  
+  .travelGoodsContent {
+    padding: 0 4rem;
+  }
+  
+  .goodsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: s(4);
+  }
+}
+
+@include mq(lg) {
+  .heroContent {
+    padding-left: 6rem;
+  }
+  
+  .travelGoodsContent {
+    padding: 0 6rem;
+  }
+  
+  .goodsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// 모바일 최적화
+@media (max-width: 767px) {
+  .hero {
+    height: 70vh;
+    background-position: center center;
+  }
+  
+  .heroContent {
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+  }
+  
+  .heroText {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .heroTitle {
+    font-size: 18px;
+    margin-bottom: s(1);
+    text-align: center;
+  }
+  
+  .heroBrand {
+    font-size: 32px;
+    margin-bottom: s(2);
+    text-align: center;
+  }
+  
+  .heroDescription {
+    font-size: 14px;
+    margin-bottom: s(1);
+    text-align: center;
+    opacity: 0.9;
+  }
+  
+  .heroSubDescription {
+    font-size: 12px;
+    margin-bottom: s(4);
+    text-align: center;
+    opacity: 0.8;
+  }
+  
+  .ctaButton {
+    width: 200px;
+    padding: s(3) s(4);
+    font-size: 14px;
+    align-self: center;
+
+    &:hover {
+      background: $button-primary-hover;
+    }
+  }
+  
+  .travelGoods {
+    padding: s(6) 0;
+  }
+  
+  .travelGoodsContent {
+    padding: 0 1rem;
+    flex-direction: column;
+    gap: s(6);
+    align-items: center;
+  }
+  
+  .goodsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: s(4);
+    width: 100%;
+    max-width: 300px;
+    justify-items: center; // 각 아이템을 중앙 정렬
+  }
+  
+  .travelGoodsItem {
+    padding: s(2);
+    width: 100%; // 각 아이템이 동등한 너비를 가지도록
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .travelGoodsIcon {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+  
+  .travelGoodsText {
+    font-size: 12px;
+    margin-top: s(1);
+  }
+  
+  .scrollButton {
+    order: -1;
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+}

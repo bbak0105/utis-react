@@ -1,0 +1,618 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/tokens' as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.container {
+  width: min(100% - 2rem, 1280px);
+  margin-inline: auto;
+}
+
+/* 데스크탑 헤더: 위(로고/액션) + 아래(네비) 2단 */
+.top {
+  height: 96px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* 좌-로고-우 */
+  align-items: center;
+  gap: 24px;
+  padding: 0px 24px;
+}
+
+.authLinks {
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.authLink {
+  @include font-medium(xs);
+  color: #2d2d2f;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: gray;
+  }
+}
+
+.logo {
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.mobileLogo {
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logoImage {
+  height: 70px;
+  width: auto;
+  object-fit: contain;
+}
+
+.mobileLogo .logoImage {
+  height: 50px;
+}
+
+.actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.iconButton {
+  background: none;
+  border: 0;
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; // 배지를 위한 상대 위치
+  
+  &:hover {
+    color: #333;
+  }
+  
+  i {
+    font-size: 18px;
+  }
+}
+
+// 장바구니 배지
+.cartBadge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background:black;
+  color: white;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: bold;
+  line-height: 1;
+  min-width: 14px;
+  padding: 0;
+}
+
+.mobileHeader {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.mobileMenuButton {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 0;
+  font-size: 22px;
+  cursor: pointer;
+  color: #666;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    color: #333;
+    background: #f5f5f5;
+  }
+  
+  i {
+    font-size: 22px;
+  }
+}
+
+.navRow {
+  transition: all 0.3s ease;
+  overflow: visible;
+}
+
+.navRowExpanded {
+  background: white;
+}
+
+.expandedMenu {
+  background: white;
+  border-top: 1px solid #f3f3f3;
+  padding: 32px 0;
+  position: fixed;
+  top: 156px; /* 헤더 높이만큼 아래 */
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 268px;
+}
+
+.expandedOverlay {
+  position: fixed;
+  top: 156px; /* 헤더와 네비게이션 바 아래부터 */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+.expandedContent {
+  display: flex;
+  gap: 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.menuColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menuColumn:first-child {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: start;
+}
+
+.menuColumn:last-child {
+  background: #fef7f7;
+  padding: 24px;
+  border-radius: 8px;
+  min-width: 200px;
+}
+
+.columnTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.expandedLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  @include font-light(sm);
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  white-space: nowrap;
+  
+  &:hover {
+    color: #000;
+    background: #f5f5f5;
+  }
+}
+
+.nav {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  @include font-semibold(sm);
+  
+  // 햄버거 메뉴는 왼쪽에 고정
+  .menuToggle {
+    margin-right: 32px; // 햄버거와 네비 링크 사이 간격
+  }
+  
+  // 화면이 작아지면 간격 줄이기
+  @include mq(lg) {
+    .menuToggle {
+      margin-right: 24px;
+    }
+  }
+  
+  @include mq(md) {
+    .menuToggle {
+      margin-right: 16px;
+    }
+  }
+  
+  // 매우 작은 화면에서는 간격 더 줄이기
+  @media (max-width: 1200px) {
+    .menuToggle {
+      margin-right: 12px;
+    }
+  }
+  
+  @media (max-width: 1000px) {
+    @include font-semibold(xs); // 폰트도 작게
+    .menuToggle {
+      margin-right: 8px;
+    }
+  }
+  
+  @media (max-width: 900px) {
+    @include font-semibold(xs);
+    .menuToggle {
+      margin-right: 6px;
+    }
+  }
+}
+
+.link {
+  padding: 8px 4px;
+  border-bottom: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+.linkActive {
+  border-color: #111;
+}
+
+.notificationDot {
+  width: 6px;
+  height: 6px;
+  background: #ff4444;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+}
+
+.menuToggle {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: #666;
+  
+  &:hover {
+    background: #f5f5f5;
+    color: #333;
+  }
+  
+  i {
+    font-size: 16px;
+  }
+}
+
+
+// 모바일 액션 버튼들
+.mobileActions {
+  display: flex;
+  gap: 12px;
+}
+
+// 메인 콘텐츠
+.main {
+  min-height: 100dvh;
+}
+
+// 드로어 스타일
+.drawerContent {
+  padding: 16px;
+}
+
+.drawerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.userButton {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: #f5f5f5;
+  }
+}
+
+// 푸터 스타일
+.footer {
+  background: white;
+  border-top: 1px solid #eee;
+  margin-top: auto;
+  
+  // Flights 페이지에서 다크모드
+  &.footerDark {
+    background: $dark-bg-primary;
+    border-top: 1px solid $dark-border-primary;
+    
+    .companyName {
+      color: $dark-text-primary;
+    }
+    
+    .companyDetails p {
+      color: $dark-text-secondary;
+    }
+    
+    .sectionTitle {
+      color: $dark-text-primary;
+    }
+    
+    .phoneNumber {
+      color: $dark-text-primary;
+    }
+    
+    .serviceLinks a {
+      color: $dark-text-secondary;
+      
+      &:hover {
+        color: $dark-text-primary;
+      }
+    }
+    
+    .footerBottom {
+      border-top: 1px solid $dark-border-primary;
+      
+      .copyright p {
+        color: $dark-text-secondary;
+      }
+    }
+    
+    .partnerButton {
+      background: $dark-bg-secondary;
+      color: $dark-text-secondary;
+      border: 1px solid $dark-border-secondary;
+      
+      &:hover {
+        background: $dark-bg-tertiary;
+        color: $dark-text-primary;
+      }
+    }
+  }
+}
+
+.footerContainer {
+  width: min(100% - 2rem, 1280px);
+  margin: 0 auto;
+  padding: 3rem 2rem 2rem;
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 2rem;
+  
+  @media (max-width: 1023px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.companyInfo {
+  .companyName {
+    @include font-bold(2xl);
+    color: #1d1d1f;
+    margin: 0 0 1.5rem 0;
+  }
+  
+  .companyDetails {
+    p {
+      @include font-normal(xs);
+      color: #6b7280;
+      margin: 0 0 0.5rem 0;
+      line-height: 1.5;
+    }
+  }
+}
+
+.customerCenter {
+  .sectionTitle {
+    @include font-bold(lg);
+    color: #1d1d1f;
+    margin: 0 0 1rem 0;
+  }
+  
+  .phoneNumber {
+    @include font-bold(xl);
+    color: #1d1d1f;
+    margin: 0;
+  }
+}
+
+.serviceInfo {
+  .sectionTitle {
+    @include font-bold(lg);
+    color: #1d1d1f;
+    margin: 0 0 1rem 0;
+  }
+  
+  .serviceLinks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      margin-bottom: 0.5rem;
+      
+      a {
+        @include font-normal(xs);
+        color: #6b7280;
+        text-decoration: none;
+        transition: color 0.2s ease;
+        
+        &:hover {
+          color: #1d1d1f;
+        }
+      }
+    }
+  }
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid #f3f4f6;
+  
+  @media (max-width: 767px) {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+.copyright {
+  p {
+    @include font-normal(xs);
+    color: #9ca3af;
+    margin: 0;
+  }
+}
+
+.partners {
+  display: flex;
+  gap: 0.75rem;
+  
+  @media (max-width: 767px) {
+    justify-content: center;
+  }
+}
+
+.partnerButton {
+  border: none;
+  padding: 0.5rem 1rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  @include font-normal(xs);
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+  }
+}
+
+// 스크롤 탑 버튼
+.scrollButton {
+  position: fixed;
+  bottom: var(--scroll-button-bottom, 24px);
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  background: $button-primary;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  
+  i {
+    font-size: 20px;
+  }
+  
+  &:hover {
+    background: $button-primary-hover;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 113, 227, 0.4);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// 모바일 최적화
+@media (max-width: 1023px) {
+  .scrollButton {
+    bottom: var(--scroll-button-bottom, 20px);
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    
+    i {
+      font-size: 18px;
+    }
+  }
+}
+

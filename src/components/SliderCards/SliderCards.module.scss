@@ -1,0 +1,73 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/tokens' as *;
+
+.grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr; // 2-up
+}
+
+.mobileWrap { 
+  padding-inline: 12px; // 모바일 좌우 여백
+  
+  // 슬라이더 페이지네이션 스타일
+  :global(.swiper-pagination) {
+    bottom: 0 !important;
+    
+    :global(.swiper-pagination-bullet) {
+      background: #d1d5db !important; // 기본 회색
+      opacity: 1 !important;
+      width: 8px !important;
+      height: 8px !important;
+      margin: 0 4px !important;
+      border-radius: 50% !important; // 원형
+      transition: all 0.3s ease !important; // 부드러운 트랜지션
+    }
+    
+    :global(.swiper-pagination-bullet-active) {
+      background: #000000 !important; // 선택된 검은색
+      width: 24px !important; // 선택된 것은 더 넓게
+      height: 8px !important;
+      border-radius: 4px !important; // 둥근 직사각형 (캡슐 모양)
+    }
+  }
+}
+
+.card {
+  height: 200px;
+  position: relative;
+  border-radius: 16px;
+  min-height: 160px;
+  overflow: hidden;
+  // 강제로 밝은 배경 고정 - 배너 색상 간섭 방지
+  background: #f8f9fa !important;
+
+  .text {
+    position: relative;
+    z-index: 2;
+    padding: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .title {
+    margin: 0 0 8px;
+    @include font-bold(lg);
+    color: #1f2937;
+    line-height: 1.2;
+  }
+
+  .sub {
+    margin: 0;
+    @include font-normal(sm);
+    color: #6b7280;
+    line-height: 1.4;
+    font-style: italic;
+  }
+
+  .illust {
+    display: none; // 이미지가 배경으로 가므로 숨김
+  }
+}

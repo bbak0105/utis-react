@@ -1,0 +1,82 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/tokens' as *;
+
+.productList {
+  background: white;
+  padding: 1rem 0; // 패딩 더 줄이기
+}
+
+.container {
+  width: min(100% - 2rem, 1280px);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem; // 마진 늘리기
+}
+
+.title {
+  @include font-bold(3xl);
+  color: #111827;
+  margin: 0 0 8px 0;
+}
+
+.subtitle {
+  @include font-normal(base);
+  color: #6b7280;
+  margin: 0;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); // 4열로 되돌리기
+  gap: 25px 10px; // row-gap: 25px, column-gap: 10px로 더 줄이기
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+  // 큰 화면에서는 4열 유지
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  // 중간 화면에서는 3열
+  @media (max-width: 1199px) and (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  // 작은 화면에서는 2열
+  @media (max-width: 767px) and (min-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// 모바일 최적화
+@media (max-width: 479px) {
+  .productList {
+    padding: 2rem 0;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .header {
+    margin-bottom: 2rem;
+  }
+  
+  .title {
+    @include font-bold(2xl);
+  }
+  
+  .subtitle {
+    @include font-normal(sm);
+  }
+  
+  .productGrid {
+    grid-template-columns: 1fr; // 매우 작은 화면: 1열
+    gap: 1rem;
+  }
+}

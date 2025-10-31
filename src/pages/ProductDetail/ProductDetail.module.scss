@@ -1,0 +1,710 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/tokens' as *;
+
+.productDetail {
+  padding: 2rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+}
+
+.breadcrumbContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 2rem;
+  padding: 0 2rem;
+}
+
+.mainContent {
+  display: flex;
+  gap: 2rem;
+  padding: 0 2rem;
+  align-items: start;
+  min-height: 0;
+  max-width: calc(66.666% - 1rem); // 2:1 비율로 메인 컨텐츠는 2/3 너비
+  margin-right: calc(33.333% + 1rem); // infoPanel이 차지하는 공간만큼 오른쪽 마진
+}
+
+// Left Panel - Image Gallery
+.imagePanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mainImageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f8f9fa;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageCounter {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.thumbnailContainer {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+}
+
+.thumbnail {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  &:hover {
+    border-color: #ddd;
+  }
+  
+  &.thumbnailActive {
+    border-color: #333;
+  }
+}
+
+// Right Panel - Product Info
+.infoPanel {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: fixed;
+  right: 2rem;
+  width: calc(33.333% - 2rem); // 2:1 비율로 infoPanel은 1/3 너비
+  height: fit-content;
+  max-height: calc(100vh - 4rem); // 기본 높이
+  overflow-y: auto;
+  z-index: 10;
+  padding-top: 1rem;
+  max-height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 8px;
+  scroll-behavior: smooth;
+  padding-left: 8px;
+}
+
+.interestBadge {
+  background: white;
+  color: #666;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 14px;
+  text-align: center;
+  width: fit-content;
+  position: relative;
+  border: 1px solid #ddd;
+  animation: float 2s ease-in-out infinite;
+  margin-top: 0.5rem; // 애니메이션을 위한 상단 여백 추가
+  
+  // 말풍선 꼬리 추가
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid white;
+  }
+  
+  // 말풍선 꼬리 보더 추가
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 9px solid #ddd;
+  }
+
+  .interestCount {
+    @include font-bold(md);
+    color: #ff0000;
+  }
+}
+
+// 위아래 플로팅 애니메이션
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px); // 8px에서 5px로 줄여서 덜 올라가도록
+  }
+}
+
+.titleSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.productTitle {
+  @include font-bold(lg);
+  color: #333;
+  margin: 0;
+  line-height: 1.2; // 라인 높이 조정
+}
+
+.actionIcons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.iconButton {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    border-color: #333;
+    background: #f8f9fa;
+  }
+  
+  i {
+    font-size: 16px;
+    color: #666;
+  }
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+  font-size: 14px;
+  
+  i {
+    color: #28a745;
+    font-size: 16px;
+  }
+}
+
+.highlight {
+  color: #5558dd;
+  font-weight: 600;
+}
+
+.pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.originalPrice {
+  @include font-normal(sm);
+  color: #999;
+  text-decoration: line-through;
+}
+
+.discountRate {
+  @include font-bold(md);
+  color: #ff0000;
+}
+
+.discountedPrice {
+  @include font-bold(xl);
+  color: #333;
+}
+
+.description {
+  @include font-normal(sm);
+  margin-top: 1rem;
+  color: #999;
+}
+
+
+@media (max-width: 768px) {
+  .mainContent {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0 1rem;
+    max-width: 100%; // 모바일에서는 전체 너비 사용
+    margin-right: 0; // 모바일에서는 마진 제거
+  }
+  
+  .imagePanel {
+    order: 1;
+    max-width: 100%;
+  }
+  
+  .infoPanel {
+    order: 2;
+    position: static;
+    top: auto;
+    right: auto;
+    width: 100%;
+    max-height: none;
+  }
+  
+  .navigationBar,
+  .relatedProducts,
+  .contentSections {
+    max-width: 100%; // 모바일에서는 전체 너비 사용
+    margin-right: 0; // 모바일에서는 마진 제거
+  }
+  
+  .breadcrumbContainer {
+    padding: 0 1rem;
+  }
+}
+
+@include mq(sm) {
+  .productDetail {
+    padding: 1rem 0;
+  }
+  
+  .titleSection {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .actionIcons {
+    align-self: flex-end;
+  }
+  
+  .pricing {
+    flex-wrap: wrap;
+  }
+}
+
+// Navigation Bar
+.navigationBar {
+  background: white;
+  border-bottom: 1px solid #eee;
+  padding: 0 2rem;
+  margin-top: 2rem;
+  max-width: 600px; // 고정 너비로 더 컴팩트하게
+  margin-left: 1rem;
+}
+
+.navTabs {
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+
+  .navTab {
+    padding: 0.75rem 2.5rem; 
+  }
+}
+
+.navFixedTabs {
+  display: flex;
+  gap: 0;
+
+  .navTab {
+    padding: 0.75rem 6rem; // 1024px 이상 기본값
+  }
+}
+
+// 1024px 이상
+@media (min-width: 1024px) {
+  .navFixedTabs .navTab {
+    padding: 0.75rem 6rem;
+  }
+}
+
+// 768px ~ 1024px
+@media (max-width: 1023px) and (min-width: 768px) {
+  .navFixedTabs .navTab {
+    padding: 0.75rem 4rem;
+  }
+}
+
+// 480px ~ 768px
+@media (max-width: 767px) and (min-width: 480px) {
+  .navFixedTabs .navTab {
+    padding: 0.75rem 2rem;
+  }
+}
+
+// 480px 이하
+@media (max-width: 480px) {
+  .navFixedTabs .navTab {
+    padding: 0.75rem 1rem;
+  }
+}
+
+.navTab {
+  border: none;
+  background: none;
+  @include font-normal(sm); // 폰트 크기 줄이기
+  color: #666;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap; // 텍스트 줄바꿈 방지
+  
+  &:hover {
+    color: #333;
+    background: #f8f9fa; // 호버 시 배경색 추가
+  }
+  
+  &.active {
+    color: #333;
+    border-bottom-color: #333;
+    font-weight: 600; // 활성 탭은 더 굵게
+  }
+}
+
+// Sticky Navigation
+.stickyNav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-bottom: 1px solid #eee;
+  z-index: 1000;
+  padding: 0 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center; // 중앙 정렬
+}
+
+// 스티키 상태에서도 동일한 중앙 정렬 유지
+.stickyNav .navTabs {
+  max-width: 600px;
+  // margin-left: calc((66.666% - 1rem - 600px) / 2);
+  // margin-right: calc(33.333% + 1rem + (66.666% - 1rem - 600px) / 2);
+}
+
+// Related Products
+.relatedProducts {
+  padding: 2rem;
+  padding-bottom: 150px; // 푸터바 높이만큼 하단 패딩 추가 (더 여유있게)
+  background: #f8f9fa;
+  max-width: calc(66.666% - 1rem); // 2:1 비율로 메인 컨텐츠는 2/3 너비
+  margin-right: calc(33.333% + 1rem); // infoPanel이 차지하는 공간만큼 오른쪽 마진
+}
+
+.relatedProductsTitle {
+  @include font-bold(lg);
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.relatedProductsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.relatedProductCard {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.relatedProductImage {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.relatedProductInfo {
+  padding: 1rem;
+}
+
+.relatedProductName {
+  @include font-normal(sm);
+  color: #333;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.relatedProductPrice {
+  @include font-bold(md);
+  color: #333;
+}
+
+// Content Sections
+.contentSections {
+  padding: 2rem;
+  padding-bottom: 150px; // 푸터바 높이만큼 하단 패딩 추가 (더 여유있게)
+  max-width: calc(50% - 1rem); // infoPanel 너비만큼 왼쪽으로 제한
+  margin-right: calc(50% + 1rem); // infoPanel이 차지하는 공간만큼 오른쪽 마진
+}
+
+.section {
+  margin-bottom: 3rem;
+  
+  h2 {
+    @include font-bold(lg);
+    color: #333;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #eee;
+  }
+}
+
+.sectionContent {
+  @include font-normal(md);
+  color: #666;
+  line-height: 1.6;
+}
+
+// Footer Bar
+.footerBar {
+  height: 80px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 120px;
+}
+
+.totalLabel {
+  @include font-normal(xs);
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.totalCount {
+  @include font-bold(lg);
+  color: black;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.footerCenter {
+  flex: 1;
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+  padding-right: 16px;
+}
+
+.cartButton {
+  padding: 0.875rem 2.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  border: none;
+  border-radius: 25px;
+  @include font-bold(sm);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  
+  &:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.footerRight {
+  display: flex;
+  gap: 1rem;
+}
+
+.buyButton {
+  padding: 0.875rem 2.5rem;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  @include font-bold(sm);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  }
+}
+
+@media (max-width: 868px) {
+  .mainContent {
+    display: block;
+    padding: 0 1rem;
+    max-width: 100%;
+    margin-right: 0;
+  }
+
+  .infoPanel {
+    position: static;
+    top: auto;
+    right: auto;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 1rem;
+    padding-right: 0;
+    max-height: none; // 높이 제한 해제
+    overflow-y: visible; // 스크롤 제거
+  }
+
+  .navigationBar,
+  .stickyNav {
+    padding: 0 1rem;
+    max-width: 100%; // 모바일에서는 전체 너비 사용
+    margin-right: 0; // 모바일에서는 마진 제거
+  }
+  
+  .navTab {
+    padding: 0.75rem 1rem; // 모바일에서도 컴팩트하게
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navTab {
+    padding: 0.75rem 0rem; // 좌우 패딩 제거
+  }
+  
+  .relatedProducts,
+  .contentSections {
+    padding: 1rem;
+    padding-bottom: 180px; // 모바일에서 푸터바가 더 높으므로 더 많은 패딩
+    max-width: 100%;
+    margin-right: 0;
+  }
+  
+  .footerBar {
+    height: auto;
+    padding: 12px 16px 20px;
+    background: #fff; // 모바일은 깔끔한 흰 배경
+    border-top: 1px solid #eee;
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+  
+  .footerContent {
+    padding: 0;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+  }
+  
+  .footerLeft {
+    min-width: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; // 총액을 한 줄로 좌우 배치
+    gap: 0;
+  }
+  
+  .footerCenter {
+    order: 2;
+    width: 100%;
+    margin-top: 8px;
+  }
+  
+  .footerLeft {
+    order: 1;
+  }
+  
+  .footerRight {
+    order: 3;
+    width: 100%;
+    margin-top: 8px;
+  }
+  
+  .cartButton,
+  .buyButton {
+    width: 100%;
+    max-width: none;
+    padding: 12px 16px;
+    border-radius: 10px;
+  }
+
+  .cartButton {
+    background: #f5f6f8;
+    color: #333;
+    box-shadow: none;
+  }
+
+  .buyButton {
+    background: #111;
+    color: #fff;
+    box-shadow: none;
+  }
+}

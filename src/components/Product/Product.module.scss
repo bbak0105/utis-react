@@ -1,0 +1,182 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/tokens' as *;
+
+// 상품 아이템 (li)
+.productItem {
+  list-style: none;
+  background: white;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+// 썸네일 영역
+.thumb {
+  position: relative;
+  background: #e3f2fd; // 연한 파란색 배경
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1; // 정사각형으로 만들기
+  border-radius: 8px; // 둥근 모서리 적절하게
+  overflow: hidden; // 확대 시 테두리 내부에서만 표시
+  
+  .thumbLink {
+    display: block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .thumbImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px; 
+    transition: transform 0.3s ease;
+    
+    &.imageHovered {
+      transform: scale(1.05);
+    }
+  }
+}
+
+// 액션 버튼들
+.actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  
+  .thumb:hover & {
+    opacity: 1;
+  }
+}
+
+.actionItem {
+  display: block;
+}
+
+.actionButton {
+  width: 36px;
+  height: 36px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  i {
+    font-size: 16px;
+    color: #374151;
+  }
+  
+  &:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    
+    i {
+      color: #111827;
+    }
+  }
+}
+
+// 상품정보 영역
+.info {
+  padding: 6px;
+  background: white;
+}
+
+// 상품명
+.name {
+  display: block;
+  text-decoration: none;
+  margin-bottom: 4px;
+  
+  .nameText {
+    @include font-bold(sm);
+    color: #1d1d1f;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  &:hover .nameText {
+    color: #0071e3;
+  }
+}
+
+// 상품 설명 리스트
+.desc {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.descItem {
+  margin-bottom: 2px;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.descText {
+  @include font-normal(sm);
+  color: #8d8d8f;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.originalPrice {
+  @include font-normal(sm);
+  color: #a6a6a9;
+  font-size: 12px;
+  text-decoration: line-through;
+}
+
+.discountRate {
+  @include font-bold(sm);
+  color: red;
+  font-size: 13px;
+  margin-right: 4px;
+}
+
+.discountedPrice {
+  @include font-bold(sm);
+  color: #1d1d1f;
+  font-size: 13px;
+}
+
+// 모바일 최적화
+@media (max-width: 767px) {
+  .thumb {
+  }
+  
+  .info {
+    padding: 12px;
+  }
+  
+  .name .nameText {
+    font-size: 14px;
+  }
+  
+  .descText,
+  .originalPrice {
+    font-size: 13px;
+  }
+  
+  .discountRate,
+  .discountedPrice {
+    font-size: 15px;
+  }
+}

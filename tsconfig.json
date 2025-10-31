@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "baseUrl": ".",
+    "paths": { "@/*": ["src/*"] },
+    "skipLibCheck": true,
+    "types": ["vite/client"],
+    "outDir": "./dist-tsc"
+  },
+  "include": ["src"],
+  "exclude": ["dist", "dist-tsc", "dist-server", "node_modules"]
+}

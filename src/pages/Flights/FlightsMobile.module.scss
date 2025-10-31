@@ -1,0 +1,545 @@
+// FlightsMobile.module.scss - 모바일 전용 스타일
+
+@use '../../styles/tokens' as *;
+
+.container {
+  padding: 1.5rem 1rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+  padding-bottom: 2rem; // 하단 버튼이 잘리지 않도록
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.pageTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  transition: all 0.6s ease-out;
+}
+
+.animateIn {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.animateOut {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.searchCard {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
+  margin-bottom: 2rem;
+}
+
+.tabContainer {
+  display: flex;
+  margin-bottom: 1.5rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.tab {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &.active {
+    background: white;
+    color: #3b82f6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.inputFields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputGroup label {
+  font-weight: 700;
+  color: #374151;
+  font-size: 1rem;
+}
+
+.cityInput,
+.dateInput,
+.passengerInput {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #f9fafb;
+  color: #374151;
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+}
+
+.searchButton {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: $gradient-primary;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.searchIcon {
+  font-size: 1.125rem;
+}
+
+.searchResults {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
+  margin-top: 1rem; // 상단 여백 추가
+}
+
+.searchResults h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 1.5rem 0;
+}
+
+.flightsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.flightCard {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #e5e7eb;
+}
+
+.flightInfo {
+  margin-bottom: 0.75rem;
+}
+
+.route {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.airline {
+  background: #3b82f6;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.routeText {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+.flightDetails {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.priceInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.selectButton {
+  background: $button-blue;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $button-blue-hover;
+    transform: translateY(-1px);
+  }
+}
+
+.flightCardRow {
+  display: flex;
+  align-items: flex-start; // 상단 정렬로 변경
+  gap: 0.75rem;
+  width: 100%;
+}
+
+// 출발/도착 시간을 같은 라인에 맞추기
+.flightCardRow > div {
+  display: flex;
+  flex-direction: column;
+}
+
+// 시간 요소들을 같은 라인에 맞추기
+.flightCardRow .departureInfo .time,
+.flightCardRow .arrivalInfo .time {
+  height: 1.5rem; // 고정 높이로 맞춤
+  display: flex;
+  align-items: center;
+}
+
+// 모바일 반응형 추가 스타일
+@media (max-width: 480px) {
+  .container {
+    padding: 0.75rem;
+    padding-bottom: 2rem;
+  }
+
+  .searchCard {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .pageHeader {
+    margin-bottom: 1rem;
+  }
+
+  .pageTitle {
+    font-size: 1.125rem;
+  }
+
+  .searchResults {
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
+  .searchResults h2 {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+  }
+
+  .flightCard {
+    padding: 0.875rem;
+    gap: 0.75rem;
+  }
+
+  .flightCardRow {
+    gap: 0.5rem;
+  }
+
+  .time {
+    font-size: 1.125rem;
+  }
+
+  .airport {
+    font-size: 0.75rem;
+  }
+
+  .baggageInfo {
+    font-size: 0.65rem;
+  }
+
+  .duration {
+    font-size: 0.7rem;
+  }
+
+  .price {
+    font-size: 1rem;
+  }
+
+  .selectButton {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8rem;
+  }
+}
+
+// 로딩 placeholder 스타일
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.loadingPlaceholder {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.loadingCard {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loadingContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.loadingPrice {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 80px;
+}
+
+.loadingLine {
+  height: 12px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+
+  &:nth-child(1) {
+    width: 100%;
+  }
+
+  &:nth-child(2) {
+    width: 80%;
+  }
+
+  &:nth-child(3) {
+    width: 60%;
+  }
+}
+
+// 상세한 비행기 카드 스타일
+.departureInfo,
+.arrivalInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  flex: 1;
+  align-items: flex-start; // 왼쪽 정렬
+}
+
+// 각 행의 요소들을 같은 라인에 맞추기
+.departureInfo > :nth-child(1),  // 시간
+.arrivalInfo > :nth-child(1) {
+  min-height: 1.875rem;
+  display: flex;
+  align-items: center;
+}
+
+.departureInfo > :nth-child(2),  // 공항 코드
+.arrivalInfo > :nth-child(2) {
+  min-height: 1.125rem;
+  display: flex;
+  align-items: center;
+}
+
+.departureInfo > :nth-child(3),  // 수하물 정보 / 항공사 정보
+.arrivalInfo > :nth-child(3) {
+  min-height: 1.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.time {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.2;
+}
+
+.airport {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.baggageInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.7rem;
+  color: #6b7280;
+  line-height: 1.3;
+}
+
+.baggageIcon {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.paymentMethod {
+  font-size: 0.7rem;
+  color: #9ca3af;
+  margin-top: 0.25rem;
+}
+
+.flightPath {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  flex: 1;
+  padding: 0 0.5rem;
+  min-width: 60px;
+  // flightCardRow의 수직 중앙에 배치
+  align-self: center;
+  margin-top: 0;
+}
+
+.pathLine {
+  width: 100%;
+  height: 2px;
+  background: #e5e7eb;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pathDot {
+  width: 8px;
+  height: 8px;
+  background: #6b7280;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.duration {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-align: center;
+  white-space: nowrap;
+}
+
+// arrivalInfo는 위에서 departureInfo와 함께 정의됨
+
+.airlineInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.airlineName {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.layover {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.codeshare {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.priceSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+  margin-top: auto;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.price {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: $button-primary;
+  white-space: nowrap;
+}
+
+.priceArrow {
+  font-size: 1rem;
+  color: $button-primary;
+}

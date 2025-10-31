@@ -1,0 +1,71 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/tokens' as *;
+
+.container {
+  padding: 4rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.pageTitle {
+  @include font-bold(xl);
+  color: #333;
+  margin: 0;
+  transition: all 0.6s ease-out;
+}
+
+.animateIn {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.animateOut {
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+.breadcrumbContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  padding: 0 3rem;
+}
+
+.filterSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 0 3rem;
+  width: 100%;
+  min-height: 40px;
+}
+
+.filterLeft {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.filterRight {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+// 반응형 디자인 - 매우 작은 화면에서만 세로 배치
+@media (max-width: 480px) {
+  .filterSection {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+}

@@ -1,0 +1,207 @@
+@use '../../styles/tokens' as *;
+@use '../../styles/mixins' as *;
+
+.calendarWrapper {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f1f5f9;
+}
+
+.calendarHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #374151;
+        margin: 0;
+    }
+}
+
+.calendarHeaderNoNav {
+    justify-content: center;
+}
+
+.navButton {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    color: #64748b;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+
+    &:hover {
+        background: #f1f5f9;
+        border-color: #cbd5e1;
+        color: #475569;
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.calendarGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.weekDays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.weekDay {
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6b7280;
+    padding: 0.5rem;
+}
+
+.daysGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+}
+
+.dayButton {
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.125rem;
+    position: relative;
+    height: 2.5rem;
+    width: 100%;
+    justify-content: center;
+
+    &:hover {
+        background: #f1f5f9;
+        color: #1e293b;
+        transform: translateY(-1px);
+    }
+
+    &.selectedDay {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        color: white;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        transform: translateY(-1px);
+        
+        &.saturday,
+        &.sunday,
+        &.holiday {
+            color: white;
+        }
+    }
+
+    &.inRange {
+        background: rgba(59, 130, 246, 0.08);
+        color: #1e293b;
+        
+        &:hover {
+            background: rgba(59, 130, 246, 0.12);
+        }
+    }
+
+    &.otherMonth {
+        color: #cbd5e1;
+        background: transparent;
+        
+        &:hover {
+            background: #f8fafc;
+            color: #94a3b8;
+        }
+        
+        &.sunday,
+        &.saturday {
+            color: #cbd5e1;
+        }
+        
+        &.inRange {
+            background: rgba(59, 130, 246, 0.05);
+            color: #94a3b8;
+        }
+    }
+
+    &.today:not(.selectedDay):not(.inRange) {
+        background: #fef3c7;
+        color: #92400e;
+        font-weight: 600;
+        
+        &:hover {
+            background: #fde68a;
+        }
+    }
+
+    &.sunday {
+        color: #dc2626;
+    }
+    
+    &.saturday {
+        color: #2563eb; 
+    }
+
+    &.holiday {
+        color: #dc2626;
+    }
+
+    &.pastDate {
+        color: #cbd5e1;
+        background: transparent;
+        cursor: not-allowed;
+        opacity: 0.5;
+        
+        &:hover {
+            background: transparent;
+            transform: none;
+        }
+        
+        &.sunday,
+        &.saturday {
+            color: #cbd5e1;
+        }
+    }
+}
+
+.holidayDot {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 0.5rem;
+    color: #dc2626;
+}
+
+.dayNumber {
+    font-weight: 500;
+}
+
+.dateLabel {
+    font-size: 0.625rem;
+    font-weight: 400;
+    opacity: 0.8;
+}

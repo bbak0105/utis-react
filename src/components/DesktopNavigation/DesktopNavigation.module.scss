@@ -1,0 +1,111 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/tokens' as *;
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly; // 모든 요소 사이에 동일한 간격
+  flex: 1; // 남은 공간 모두 사용
+  max-width: 800px; // 최대 너비 제한
+  margin: 0 auto; // 중앙 정렬
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  position: relative;
+  
+  &:hover {
+    color: #000;
+  }
+}
+
+.linkActive {
+  color: #000;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #111;
+    z-index: 1;
+  }
+}
+
+.notificationDot {
+  width: 6px;
+  height: 6px;
+  background: #ff4444;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+}
+
+// 드롭다운 컨테이너 (일반적인 이름으로 변경)
+.dropdownContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% - 4px); // 4px 위로 올려서 오버랩 생성
+  left: 50%;
+  transform: translateX(-50%); // 중앙 정렬
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 150px;
+  z-index: 1000;
+  padding: 8px 0;
+  margin-top: 0;
+}
+
+.dropdownLink {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #666;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    color: #333;
+    background: #f8f9fa;
+  }
+}
+
+// 기존 csContainer와 csDropdown을 새로운 클래스로 매핑
+.csContainer {
+  @extend .dropdownContainer;
+}
+
+.csDropdown {
+  @extend .dropdown;
+}
+
+.csDropdownLink {
+  @extend .dropdownLink;
+}

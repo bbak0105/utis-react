@@ -1,0 +1,142 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/tokens' as *;
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.optionRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.3rem 0;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.optionLabel {
+  @include font-normal(sm);
+  color: #666;
+  min-width: 120px;
+}
+
+.optionValue {
+  @include font-normal(sm);
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  
+  i {
+    font-size: 14px;
+    color: #999;
+  }
+}
+
+.highlight {
+  color: #1976d2;
+  font-weight: 600;
+}
+
+// 커스텀 드롭다운 스타일
+.customSelect {
+  position: relative;
+  flex: 1;
+}
+
+.selectButton {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  @include font-normal(sm);
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  transition: border-color 0.2s ease;
+  
+  &:hover {
+    border-color: #999;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+}
+
+.selectText {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selectButton i {
+  font-size: 16px;
+  color: #666;
+  transition: transform 0.2s ease;
+  
+  &.expanded {
+    transform: rotate(180deg);
+  }
+}
+
+.selectDropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.selectOption {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: none;
+  text-align: left;
+  @include font-normal(sm);
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background: #f8f9fa;
+  }
+  
+  &.selected {
+    background: #e3f2fd;
+    color: #1976d2;
+  }
+  
+  i {
+    color: #1976d2;
+    font-size: 16px;
+  }
+}
+
+// 반응형 디자인
+@media (max-width: 868px) {
+  .customSelect {
+    flex: 1;
+  }
+}

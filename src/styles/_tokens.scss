@@ -1,0 +1,106 @@
+// Breakpoints (px)
+$breakpoints: (
+  sm: 480,
+  md: 768,
+  lg: 1024,
+  xl: 1280
+);
+
+// Spacing scale (rem)
+$space: (
+  0: 0,
+  1: .25rem,  // 4px
+  2: .5rem,   // 8px
+  3: .75rem,  // 12px
+  4: 1rem,    // 16px
+  6: 1.5rem,  // 24px
+  8: 2rem     // 32px
+);
+
+// Chip
+$chip-lightblue: #e1f5fe;
+$chip-lightgreen: #e8f5e9;
+$chip-lightyellow: #fff3e0;
+$chip-lightred: #ffebee;
+$chip-lightpurple: #f3e8ff;
+$chip-lightgray: #f5f5f5;
+$chip-lightblack: #212121;
+$chip-lightwhite: #ffffff;
+
+// Chip Border Colors (matching background tones)
+$chip-border-lightblue: #55ccfe;
+$chip-border-green: #4caf50;
+$chip-border-yellow: #ff9800;
+$chip-border-red: #f44336;
+$chip-border-purple: #9c27b0;
+$chip-border-gray: #9e9e9e;
+$chip-border-black: #000000;
+$chip-border-white: #e0e0e0;
+
+// Colors
+$color-primary: #5558dd;
+$color-secondary: #55ccfe;
+$color-text: #222;
+$color-bg: #fff;
+$color-bg-light: #fafafa;
+
+// Button Colors
+$button-primary: #5558dd;
+$button-secondary: #55ccfe;
+$button-blue: #3b82f6;
+$button-blue-hover: #2563eb;
+$button-primary-hover: #3337d6;
+$button-primary-hover-light: #8b8ee8;
+
+// Gradients
+$gradient-primary: linear-gradient(135deg, #5558dd 0%, #3337d6 100%);
+$gradient-primary-light: linear-gradient(135deg, #5558dd 0%, #8b8ee8 100%);
+$gradient-purple: linear-gradient(135deg, #5558dd 0%, #9c27b0 100%);
+
+// Dark Mode Colors
+$dark-bg-primary: #1f2937;
+$dark-bg-secondary: #374151;
+$dark-bg-tertiary: #4b5563;
+$dark-text-primary: #f9fafb;
+$dark-text-secondary: #d1d5db;
+$dark-text-tertiary: #9ca3af;
+$dark-border-primary: #374151;
+$dark-border-secondary: #4b5563;
+
+// Typography
+$font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+
+// Font weights
+$font-weight-thin: 100;
+$font-weight-extralight: 200;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+$font-weight-black: 900;
+
+// Font sizes
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-lg: 1.125rem;   // 18px
+$font-size-xl: 1.25rem;    // 20px
+$font-size-2xl: 1.5rem;    // 24px
+$font-size-3xl: 1.875rem;  // 30px
+$font-size-4xl: 2.25rem;   // 36px
+$font-size-5xl: 3rem;      // 48px
+
+// Line heights
+$line-height-tight: 1.25;
+$line-height-snug: 1.375;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.625;
+$line-height-loose: 2;
+
+// fluid type range
+$min-vw: 360;
+$max-vw: 1440;
+$min-fs: 14; // px
+$max-fs: 18; // px

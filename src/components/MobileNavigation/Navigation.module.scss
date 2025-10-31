@@ -1,0 +1,93 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/tokens' as *;
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navItem {
+  // 줄 제거 - 이미지 디자인에 맞춤
+  
+  a {
+    display: block;
+    padding: 12px 0;
+    text-decoration: none;
+    color: #333;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: #000;
+    }
+  }
+}
+
+.navItemWithChildren {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: #000;
+  }
+  
+  i {
+    font-size: 16px;
+    color: #666;
+    transition: transform 0.2s ease;
+  }
+  
+  .expanded {
+    transform: rotate(180deg);
+  }
+}
+
+.subNavList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-left: 16px;
+}
+
+.subNavItem {
+  a {
+    display: block;
+    padding: 8px 0;
+    text-decoration: none;
+    color: #666;
+    font-size: 14px;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: #333;
+    }
+  }
+}
+
+.notificationDot {
+  width: 6px;
+  height: 6px;
+  background: #ff4444;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+}

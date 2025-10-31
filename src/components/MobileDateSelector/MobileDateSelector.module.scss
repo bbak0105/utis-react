@@ -1,0 +1,307 @@
+// MobileDateSelector.module.scss
+
+@use '../../styles/tokens' as *;
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputGroup label {
+  font-weight: 700;
+  color: #374151;
+  font-size: 1rem;
+}
+
+.selectorContainer {
+  position: relative;
+}
+
+.selectorButton {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: #f9fafb;
+  color: #374151;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: $button-primary;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(85, 88, 221, 0.1);
+  }
+
+  &:hover {
+    border-color: #d1d5db;
+    background: white;
+  }
+}
+
+.icon {
+  font-size: 1.125rem;
+  color: $button-primary;
+}
+
+.selectedValue {
+  flex: 1;
+  text-align: left;
+  font-weight: 500;
+}
+
+.arrow {
+  font-size: 1.25rem;
+  color: #6b7280;
+  transition: transform 0.2s ease;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 20px 20px 0 0;
+  z-index: 1001;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modalTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #374151;
+  margin: 0;
+}
+
+.closeButton {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: #f3f4f6;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  color: #6b7280;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #e5e7eb;
+    color: #374151;
+  }
+}
+
+.calendarContainer {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+}
+
+.navButton {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  background: white;
+  color: #6b7280;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: $button-primary;
+    color: $button-primary;
+    background: rgba(85, 88, 221, 0.05);
+  }
+}
+
+.monthTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+}
+
+.weekDays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+.weekDay {
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6b7280;
+  padding: 0.5rem;
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
+
+.calendarDay {
+  aspect-ratio: 1;
+  border: none;
+  background: transparent;
+  color: #374151;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover:not(:disabled) {
+    background: rgba(85, 88, 221, 0.1);
+    color: $button-primary;
+  }
+
+  &.otherMonth {
+    color: #d1d5db;
+  }
+
+  &.today {
+    background: rgba(85, 88, 221, 0.1);
+    color: $button-primary;
+    font-weight: 600;
+  }
+
+  &.past {
+    color: #d1d5db;
+    cursor: not-allowed;
+    
+    &:hover {
+      background: transparent;
+      color: #d1d5db;
+    }
+  }
+
+  &.future {
+    color: #d1d5db;
+    cursor: not-allowed;
+    
+    &:hover {
+      background: transparent;
+      color: #d1d5db;
+    }
+  }
+
+  &.selected {
+    background: $gradient-primary;
+    color: white;
+    font-weight: 600;
+  }
+
+  &.returnSelected {
+    background: $gradient-primary-light;
+    color: white;
+    font-weight: 600;
+  }
+
+  &.inRange {
+    background: rgba(85, 88, 221, 0.1);
+    color: $button-primary;
+  }
+}
+
+.modalActions {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.todayButton {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  background: white;
+  color: #374151;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #9ca3af;
+    background: #f9fafb;
+  }
+}
+
+.completeButton {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border: none;
+  border-radius: 12px;
+  background: $gradient-primary;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $gradient-primary-light;
+    transform: translateY(-1px);
+  }
+}

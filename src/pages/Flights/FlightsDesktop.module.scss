@@ -1,0 +1,1801 @@
+@use '../../styles/tokens' as *;
+@use '../../styles/mixins' as *;
+
+.container {
+  min-height: 100vh;
+  // background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+  // padding: 4rem 8rem;
+  padding: 4rem;
+  position: relative;
+
+  // @media (min-width: 768px) and (max-width: 1024px) {
+  //   padding: 4rem 4rem;
+  // }
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.pageTitle {
+  @include font-bold(xl);
+  // color: white;
+  margin: 0;
+  transition: all 0.6s ease-out;
+}
+
+.animateIn {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.animateOut {
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+.ticketContainer {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: center;
+}
+
+.searchCard {
+  background: white;
+  border-radius: 20px;
+  padding: 4rem;
+  box-shadow: -10px 0 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
+}
+
+.ticketDivider {
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    white 0,
+    white 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  margin: 0;
+  position: relative;
+  width: 97%;
+}
+
+.infoCard {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.infoContent {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 0;
+  }
+  
+  p {
+    font-size: 1rem;
+    color: #6b7280;
+    margin: 0;
+  }
+}
+
+.instructionText {
+  text-decoration: underline;
+  text-decoration-color: rgba(85, 88, 221, 0.3);
+  text-underline-offset: 8px;
+}
+
+.planeIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // margin-bottom: 1rem;
+  
+  svg {
+    width: 4rem;
+    height: 4rem;
+    color: $button-primary;
+    opacity: 0.8;
+  }
+}
+
+.citySelector,
+.calendarSelector,
+.passengerSelector {
+  width: 100%;
+  // max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendarContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.selectorHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 0;
+  }
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #f3f4f6;
+    color: #374151;
+  }
+}
+
+.searchInputContainer {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.searchInputIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #6b7280;
+  z-index: 1;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.875rem 1rem 0.875rem 3rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: white;
+  color: #374151;
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: $button-primary;
+    box-shadow: 0 0 0 3px rgba(85, 88, 221, 0.1);
+  }
+
+  &::placeholder {
+    color: #9ca3af;
+  }
+}
+
+.searchResults {
+  margin-bottom: 1rem;
+
+  h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #6b7280;
+    margin: 0 0 0.75rem 0;
+  }
+}
+
+.recentSection {
+  margin-bottom: 1.5rem;
+
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 0.75rem 0;
+  }
+}
+
+
+
+.categoryTabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.categoryTab {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #f3f4f6;
+  }
+}
+
+.cityGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, max-content));
+  gap: 0.75rem;
+  max-width: 100%;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1rem;
+}
+
+.tabGroup {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tab {
+  background: none;
+  border: none;
+  padding: 0.875rem 1.75rem;
+  border-radius: 8px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #f3f4f6;
+  }
+
+  &.active {
+    background: #3b82f6;
+    color: white;
+  }
+}
+
+.inputFields {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr 1fr 1fr;
+  gap: 1rem;
+  align-items: end;
+  
+  // 편도일 때 마지막 컬럼 확장
+  &.oneway {
+    grid-template-columns: 1fr auto 1fr 1fr 1.5fr;
+  }
+  
+  // 왕복일 때 날짜 입력이 하나로 줄어들었으므로 마지막 컬럼 확장
+  &:not(.oneway) {
+    grid-template-columns: 1fr auto 1fr 1.5fr 1fr;
+  }
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+  }
+}
+
+.cityInput,
+.dateInput,
+.passengerInput {
+  padding: 0.875rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1.125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  min-width: 0;
+  width: 100%;
+
+  &:hover {
+    border-color: #3b82f6;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+}
+
+.dateInput {
+  min-width: 120px;
+}
+
+.passengerInput {
+  min-width: 140px;
+}
+
+.swapButton {
+  background: #f3f4f6;
+  border: 2px solid #e5e7eb;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #e5e7eb;
+    border-color: #3b82f6;
+  }
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #6b7280;
+  }
+}
+
+.dash {
+  font-size: 1.5rem;
+  color: #6b7280;
+  align-self: center;
+}
+
+.searchButton {
+  background: $gradient-primary;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.875rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 2rem;
+
+  &:hover:not(:disabled) {
+    background: $gradient-primary-light;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(85, 88, 221, 0.3);
+  }
+
+  &:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .searchIcon {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.loadingSpinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// 검색 결과 스타일
+.results {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  h2 {
+    color: #1f2937;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  p {
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.flightList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.flightCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fafafa;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    border-color: $button-primary;
+    box-shadow: 0 2px 8px rgba(85, 88, 221, 0.1);
+  }
+}
+
+.flightInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.route {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.airline {
+  background: $button-primary;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.routeText {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.flightDetails {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.priceInfo {
+  text-align: right;
+}
+
+.price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $button-primary;
+}
+
+.priceButton {
+  background: $button-primary;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  
+  &:hover:not(:disabled) {
+    background: $button-primary-hover;
+  }
+  
+  &:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+  }
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.cityModal {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 800px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 0;
+  }
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+
+  &:hover {
+    background: #f3f4f6;
+  }
+}
+
+.recentSection {
+  margin-bottom: 1.5rem;
+
+  h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 0.75rem 0;
+  }
+}
+
+.recentTag {
+  display: inline-block;
+  background: $chip-lightblue;
+  border:1px solid $chip-border-lightblue;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: black;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: #b3e5fc;
+  }
+}
+
+.categoryTabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1rem;
+}
+
+.categoryTab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+
+  &:hover {
+    color: #374151;
+  }
+
+  &.active {
+    color: #000000;
+    border-bottom-color: #000000;
+    font-weight: 600;
+  }
+
+  // 밑줄 애니메이션을 위한 가상 요소
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #000000;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  &.active::after {
+    transform: scaleX(1);
+  }
+}
+
+.cityGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, max-content));
+  gap: 0.75rem;
+  max-width: 100%;
+}
+
+.cityItem {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  max-width: 200px;
+
+  &:hover {
+    background: $button-primary-hover-light;
+    color: white;
+    border-color: $button-primary-hover-light
+  }
+
+  &.selected {
+    background: $button-primary;
+    color: white;
+    border-color: $button-primary;
+  }
+}
+
+.results {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  margin-top: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 1rem 0;
+  }
+
+  p {
+    color: #6b7280;
+    margin: 0.5rem 0;
+  }
+}
+
+.priceButton {
+  background: $button-primary;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: $button-primary-hover;
+  }
+
+  &:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+  }
+}
+
+.pricingResults {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  margin-top: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 1rem 0;
+  }
+}
+
+.floatingButton {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: $button-primary;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(85, 88, 221, 0.3);
+  transition: all 0.2s ease;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &:hover {
+    background: $button-primary-hover;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(85, 88, 221, 0.4);
+  }
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+// 반응형 디자인
+@media (max-width: 1200px) {
+  .inputFields {
+    grid-template-columns: 1fr auto 1fr auto 1fr 1fr;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .inputFields {
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    
+    // 1024px 이하에서 &:not(.oneway)의 grid-template-columns 제거
+    &:not(.oneway) {
+      grid-template-columns: 1fr auto 1fr;
+    }
+  }
+
+  .inputGroup:nth-child(4),
+  .inputGroup:nth-child(5),
+  .inputGroup:nth-child(6) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .searchCard {
+    padding: 1.5rem;
+  }
+
+  .inputFields {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .swapButton {
+    order: 1;
+    align-self: center;
+    margin: 0.5rem 0;
+  }
+
+  .cityModal {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  .cityGrid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+}
+
+.passengerSection {
+  margin-bottom: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.passengerRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #f9fafb;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+  }
+}
+
+.passengerLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+.infoButton {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #6b7280;
+  color: white;
+  border: none;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.counterButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #374151;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+  }
+
+  &:disabled {
+    background: #f9fafb;
+    color: #d1d5db;
+    cursor: not-allowed;
+  }
+}
+
+.counterValue {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #374151;
+  min-width: 32px;
+  text-align: center;
+}
+
+.passengerNote {
+  font-size: 0.875rem;
+  color: #ec4899;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.seatClassSection {
+  margin-top: 1rem;
+}
+
+.seatClassGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.seatClassButton {
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: white;
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #9ca3af;
+    background: #f9fafb;
+  }
+
+  &.selected {
+    border: 2px solid #000000;
+    background: white;
+    color: #000000;
+    font-weight: 600;
+  }
+}
+
+// 추천 여행지 섹션
+.recommendedSection {
+  margin-top: 1rem;
+  padding: 1.5rem 0;
+  position: relative;
+  text-align: left;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0 0 1.5rem 2rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #6b7280;
+  background: $chip-lightwhite;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  // 말풍선 꼬리
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid $chip-lightwhite;;
+    z-index: 2;
+  }
+  
+  // 말풍선 꼬리 보더
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    left: 19px;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid #6b7280;
+    z-index: 1;
+  }
+  
+  // 위아래 움직이는 애니메이션
+  animation: float 3s ease-in-out infinite;
+}
+
+.titleIcon {
+  font-size: 1rem;
+  color: $color-primary;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.filterTabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.filterTab {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+  }
+
+  &.active {
+    background: #1f2937;
+    color: white;
+    border-color: #1f2937;
+  }
+}
+
+.destinationCards {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  position: relative;
+  width: 100%;
+  padding: 8px 2rem; /* 상하 패딩 추가로 호버 시 잘림 방지 */
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
+
+.destinationCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  width: 320px;
+  min-width: 320px;
+  position: relative;
+  z-index: 1;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10; /* 호버 시 다른 카드들 위에 표시 */
+    cursor: pointer;
+  }
+}
+
+.cardImage {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.cardContent {
+  padding: 1rem;
+  background: $color-bg-light;
+}
+
+.cardTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 0.75rem 0;
+}
+
+.cardRating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ratingBadge {
+  background: #3b82f6;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.reviewCount {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.cardPrice {
+  margin-top: 0.5rem;
+}
+
+.priceText {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #e91e63;
+  
+  // 숫자 부분은 크게
+  .priceNumber {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #e91e63;
+  }
+  
+  // "원부터~" 부분은 작게
+  .priceUnit {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #e91e63;
+  }
+}
+
+.promotionalCard {
+  .cardTitle {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+}
+
+.starIcon {
+  color: #8b5cf6;
+  font-size: 1.25rem;
+  animation: twinkle 2s ease-in-out infinite, rotate 3s linear infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// 검색 결과 스타일
+.searchResults {
+  margin-top: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.resultsHeader {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.resultsCount {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.filteredCount {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.routeInfo {
+  font-size: 0.875rem;
+  // color: #6b7280;
+}
+
+.priceSortOptions {
+  display: flex;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #e5e7eb;
+  background: white;
+  gap: 1rem;
+}
+
+.sortOption {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  background: white;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+  }
+
+  &.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+  }
+
+  &.lowestPrice.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+  }
+}
+
+.resultsContainer {
+  display: flex;
+  min-height: 600px;
+}
+
+.filtersPanel {
+  width: 280px;
+  padding: 1.5rem;
+  background: #f9fafb;
+  border-right: 1px solid #e5e7eb;
+  overflow-y: auto;
+}
+
+.filterSection {
+  margin-bottom: 2rem;
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.resetButton {
+  font-size: 0.75rem;
+  color: #6b7280;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    color: #374151;
+  }
+}
+
+.filterOption {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  color: #374151;
+  cursor: pointer;
+
+  input[type="checkbox"] {
+    margin-right: 0.5rem;
+  }
+}
+
+.airlineList {
+  margin-bottom: 0.75rem;
+}
+
+.airlineOption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 0.875rem;
+  cursor: pointer;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 0.5rem;
+  }
+}
+
+.airlineLeft {
+  display: flex;
+  align-items: center;
+}
+
+.airlineName {
+  color: #374151;
+  font-weight: 500;
+}
+
+.airlinePrice {
+  color: #6b7280;
+  font-size: 0.75rem;
+}
+
+.moreButton {
+  font-size: 0.75rem;
+  color: #6b7280;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    color: #374151;
+  }
+}
+
+.flightsList {
+  flex: 1;
+  padding: 1.5rem;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 500px;
+}
+
+.flightCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; // 왼쪽과 오른쪽 사이에 공간 분배
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  background: white;
+  transition: all 0.2s;
+  gap: 2rem; // 요소 사이 간격
+
+  &:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.airlineLogo {
+  margin-right: 1rem;
+}
+
+.logoPlaceholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.flightInfo {
+  flex: 1;
+  // max-width 제약 제거하여 자연스럽게 확장되도록
+}
+
+.codeshare {
+  font-size: 0.75rem;
+  color: #6b7280;
+  background: #f3f4f6;
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+}
+
+.flightTimes {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; // gap을 늘려서 더 넓게 배치
+  margin-bottom: 0.5rem;
+  justify-content: flex-start; // 왼쪽 정렬이지만 더 넓게
+}
+
+.flightRoute {
+  margin-bottom: 0.75rem;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.routeLabel {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.routeAirline {
+  font-size: 0.7rem;
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+.departure,
+.arrival {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px; // 출발/도착 정보도 최소 너비 확보
+  flex-shrink: 0;
+}
+
+.airport {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.time {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.flightPath {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 120px; // 더 넓게 만들어서 공간 활용
+  flex-shrink: 0; // 줄어들지 않도록
+}
+
+.pathLine {
+  width: 100%;
+  height: 2px;
+  background: #e5e7eb;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pathDot {
+  width: 8px;
+  height: 8px;
+  background: #6b7280;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.duration {
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.baggageInfo {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.priceSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+  flex-shrink: 0; // 가격 섹션이 줄어들지 않도록
+  min-width: 150px; // 최소 너비 확보
+  margin-left: auto; // 오른쪽으로 밀기
+}
+
+.price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #374151;
+}
+
+.selectButton {
+  padding: 0.5rem 1rem;
+  background: $button-blue;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: $button-blue-hover;
+  }
+}
+
+.noResults {
+  text-align: center;
+  padding: 3rem;
+  color: #6b7280;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  .noResultsIcon {
+    font-size: 3rem;
+    color: #d1d5db;
+  }
+
+  p {
+    font-size: 1.125rem;
+    margin: 0;
+  }
+}
+
+// 로딩 플레이스홀더 애니메이션
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+// 필터 패널 로딩 placeholder
+.loadingFilterSection {
+  margin-bottom: 1.5rem;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.loadingFilterTitle {
+  height: 1.5rem;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.loadingFilterSubtitle {
+  height: 1.25rem;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+  width: 60%;
+}
+
+.loadingFilterOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.loadingFilterOption {
+  height: 1rem;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  width: 80%;
+}
+
+.loadingMoreButton {
+  height: 1.5rem;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  width: 50%;
+  margin-top: 0.75rem;
+}
+
+.loadingPlaceholder {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+.loadingCard {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  background: white;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.loadingLogo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 1rem;
+  @extend .loadingPlaceholder;
+}
+
+.loadingContent {
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.loadingTitle {
+  height: 16px;
+  width: 120px;
+  margin-bottom: 8px;
+  @extend .loadingPlaceholder;
+}
+
+.loadingTimes {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 8px;
+}
+
+.loadingTime {
+  height: 14px;
+  width: 60px;
+  @extend .loadingPlaceholder;
+}
+
+.loadingDuration {
+  height: 14px;
+  width: 80px;
+  @extend .loadingPlaceholder;
+}
+
+.loadingBaggage {
+  height: 12px;
+  width: 100px;
+  @extend .loadingPlaceholder;
+}
+
+.loadingPrice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.loadingPriceText {
+  height: 20px;
+  width: 80px;
+  @extend .loadingPlaceholder;
+}
+
+.loadingButton {
+  height: 32px;
+  width: 60px;
+  border-radius: 6px;
+  @extend .loadingPlaceholder;
+}
+
+.checkButton {
+  width: 100%;
+  background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+
+  &:hover {
+    background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+  }
+}
