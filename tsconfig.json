@@ -13,5 +13,5 @@
     "outDir": "./dist-tsc"
   },
   "include": ["src", "src/types/**/*.d.ts"],
-  "exclude": ["dist", "dist-tsc", "dist-server", "node_modules"]
+  "exclude": ["dist", "dist-tsc", "dist-server", "node_modules", "server"]
 }
