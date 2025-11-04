@@ -19,6 +19,7 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }))
+app.options("*", cors())
 app.use(express.json())
 
 // API 키 유효성 검증
