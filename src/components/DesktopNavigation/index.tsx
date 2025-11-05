@@ -21,35 +21,11 @@ const DesktopNavigation = ({ onItemClick }: DesktopNavigationProps) => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
 
   const navItems: NavItem[] = [
-    { id: 'shower', label: '샤워기', path: '/shower' },
-    { id: 'adapter', label: '어댑터', path: '/adapter' },
-    { 
-      id: 'travel', 
-      label: '여행 용품', 
-      path: '/travel',
-      hasNotification: true 
-    },
-    { 
-      id: 'carrier', 
-      label: '캐리어', 
-      path: '/carrier',
-      children: [
-        { id: 'carrier-japan', label: '일본', path: '/carrier/japan' }
-      ]
-    },
-    { id: 'flights', label: '항공권', path: '/flights' },
-    { id: 'accommodation', label: '숙소', path: '/accommodation' },
-    { 
-      id: 'cs', 
-      label: '고객센터', 
-      path: '/cs',
-      children: [
-        { id: 'notice', label: '공지사항', path: '/cs/notice' },
-        { id: 'event', label: '이벤트', path: '/cs/event' },
-        { id: 'inquiry', label: '문의하기', path: '/cs/inquiry' },
-        { id: 'review', label: '상품리뷰', path: '/cs/review' }
-      ]
-    }
+    { id: 'travel', label: '여행용품', path: '/travel' },
+    { id: 'tour', label: '투어/티켓', path: '/tour' },
+    { id: 'flights', label: '항공예약', path: '/flights' },
+    { id: 'accommodation', label: '숙소예약', path: '/accommodation' },
+    { id: 'cs', label: '고객센터', path: '/cs' }
   ]
 
   const handleMouseEnter = (itemId: string) => {

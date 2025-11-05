@@ -823,30 +823,30 @@ const FlightsDesktop = () => {
 
                             {/* 최근 출발도시 */}
                             {!citySearchTerm && (
-                                <div className={styles.recentSection}>
-                                    <h4>최근 출발도시</h4>
-                                    <div 
-                                        className={styles.recentTag}
-                                        onClick={() => handleCitySelect('서울(인천)', 'departure')}
-                                    >
-                                        서울(인천)
-                                    </div>
+                            <div className={styles.recentSection}>
+                                <h4>최근 출발도시</h4>
+                                <div 
+                                    className={styles.recentTag}
+                                    onClick={() => handleCitySelect('서울(인천)', 'departure')}
+                                >
+                                    서울(인천)
                                 </div>
+                            </div>
                             )}
 
                             {/* 카테고리 탭 - 검색어가 없을 때만 표시 */}
                             {!citySearchTerm && (
-                                <div className={styles.categoryTabs}>
-                                    {Object.entries(categories).map(([key, category]) => (
-                                        <button
-                                            key={key}
-                                            className={`${styles.categoryTab} ${selectedCategory === key ? styles.active : ''}`}
-                                            onClick={() => setSelectedCategory(key)}
-                                        >
-                                            {category.name}
-                                        </button>
-                                    ))}
-                                </div>
+                            <div className={styles.categoryTabs}>
+                                {Object.entries(categories).map(([key, category]) => (
+                                    <button
+                                        key={key}
+                                        className={`${styles.categoryTab} ${selectedCategory === key ? styles.active : ''}`}
+                                        onClick={() => setSelectedCategory(key)}
+                                    >
+                                        {category.name}
+                                    </button>
+                                ))}
+                            </div>
                             )}
 
                             {/* 도시 목록 - 검색어가 있으면 전체에서 필터링, 없으면 선택된 탭의 도시만 표시 */}
@@ -918,17 +918,17 @@ const FlightsDesktop = () => {
 
                             {/* 카테고리 탭 - 검색어가 없을 때만 표시 */}
                             {!citySearchTerm && (
-                                <div className={styles.categoryTabs}>
-                                    {Object.entries(categories).map(([key, category]) => (
-                                        <button
-                                            key={key}
-                                            className={`${styles.categoryTab} ${selectedCategory === key ? styles.active : ''}`}
-                                            onClick={() => setSelectedCategory(key)}
-                                        >
-                                            {category.name}
-                                        </button>
-                                    ))}
-                                </div>
+                            <div className={styles.categoryTabs}>
+                                {Object.entries(categories).map(([key, category]) => (
+                                    <button
+                                        key={key}
+                                        className={`${styles.categoryTab} ${selectedCategory === key ? styles.active : ''}`}
+                                        onClick={() => setSelectedCategory(key)}
+                                    >
+                                        {category.name}
+                                    </button>
+                                ))}
+                            </div>
                             )}
 
                             {/* 도시 목록 - 검색어가 있으면 전체에서 필터링, 없으면 선택된 탭의 도시만 표시 */}

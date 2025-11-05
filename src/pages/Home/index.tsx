@@ -1,14 +1,32 @@
-import SliderCards, { Slider } from '@/components/SliderCards';
+import MainBanner from '@/components/MainBanner'
+import SliderCards, { Slider } from '@/components/SliderCards'
 import ProductList from '@/components/ProductList'
 import FeatureCards from '@/components/FeatureCards'
 import { ProductProps } from '@/components/Product'
 import useScrollAnimation from '@/utils/hooks/useScrollAnimation'
 import s from './Home.module.scss'
 
-const ITEMS: Slider[] = [
+const BANNER_ITEMS = [
     {
         id: "1",
-        title: '무료 사워기 받아가세요',
+        image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1200&h=400&fit=crop',
+    },
+    {
+        id: "2",
+        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&h=400&fit=crop',
+        title: '더 특별한 여행을 경험하세요',
+        buttonText: '자세히 보기'
+    },
+    {
+        id: "3",
+        image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&h=400&fit=crop',
+    }
+]
+
+const SLIDER_ITEMS: Slider[] = [
+    {
+        id: "1",
+        title: '무료 샤워기 받아가세요',
         subtitle: '신규 가입시 무료 샤워기 지급',
         image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
     },
@@ -60,7 +78,6 @@ const BEST_PRODUCTS: ProductProps[] = [
 ]
 
 const Home = () => {
-    const heroRef = useScrollAnimation<HTMLElement>({ threshold: 0.2 })
     const travelGoodsRef = useScrollAnimation<HTMLElement>({ threshold: 0.1 })
     const sliderRef = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 })
     const productListRef = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 })
@@ -68,26 +85,22 @@ const Home = () => {
 
     return (
         <div className={s.home}>
-            {/* 히어로 섹션 */}
-            <section 
-                ref={heroRef.ref} 
-                className={`${s.hero} ${heroRef.isVisible ? s.animateIn : s.animateOut}`}
+            {/* 메인 배너 */}
+            <div className={s.bannerSection}>
+                <MainBanner items={BANNER_ITEMS} />
+            </div>
+
+            {/* 기존 슬라이드 카드들 */}
+            <div 
+                ref={sliderRef.ref} 
+                className={`${sliderRef.isVisible ? s.animateIn : s.animateOut}`}
+                style={{ marginTop: '2rem' }}
             >
-                <div className={s.heroContent}>
-                    <div className={s.heroText}>
-                        <h1 className={s.heroTitle}>더 특별한 여행을 경험하세요</h1>
-                        <h2 className={s.heroBrand}>유티스</h2>
-                        <p className={s.heroDescription}>
-                            유티스에서 진짜 나다운 여행을 떠나보세요. <br/>
-                            항공부터 숙소 투어까지 한번에 편리하게 이용하게 사용하세요.
-                        </p>
-                        <button className={s.ctaButton}>자세히 보기</button>
-                    </div>
-                </div>
-            </section>
+                <SliderCards items={SLIDER_ITEMS} />
+            </div>
 
             {/* 상품 카테고리 섹션 */}
-            <section 
+            {/* <section 
                 ref={travelGoodsRef.ref} 
                 className={`${s.travelGoods} ${travelGoodsRef.isVisible ? s.animateIn : s.animateOut}`}
             >
@@ -111,15 +124,8 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
-            <div 
-                ref={sliderRef.ref} 
-                className={`${sliderRef.isVisible ? s.animateIn : s.animateOut}`}
-            >
-                <SliderCards items={ITEMS} />
-            </div>
-            
             {/* 베스트 상품 섹션 */}
             <div 
                 ref={productListRef.ref} 

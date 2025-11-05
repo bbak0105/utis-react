@@ -1,0 +1,313 @@
+.bannerContainer {
+  position: relative;
+  width: 100%;
+  max-width: 1400px; // 최대 너비 제한
+  margin: 0 auto;
+  overflow: visible; // 화살표 버튼이 보이도록
+  margin: 4rem;
+  padding: 0 1rem; // 좌우 패딩 추가
+
+  // 태블릿 (768px ~ 1024px)
+  @media (max-width: 1024px) and (min-width: 769px) {
+    margin: 2rem 1rem;
+    padding: 0;
+  }
+
+  // 모바일 (768px 미만)
+  @media (max-width: 768px) {
+    margin: 1rem 0;
+    padding: 0;
+    overflow: hidden; // 모바일에서는 화살표가 내부에 배치되므로
+  }
+}
+
+.bannerWrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 32%; // 가운데 카드 기준 고정 높이 (32% 너비 = 32% 높이)
+  display: block;
+
+  // 태블릿 (768px ~ 1024px) - 더 넓은 비율
+  @media (max-width: 1024px) and (min-width: 769px) {
+    padding-bottom: 28%; // 태블릿에서는 더 넓게 (가로가 더 길게)
+  }
+
+  // 모바일
+  @media (max-width: 768px) {
+    padding-bottom: 60%; // 모바일에서는 더 높게
+  }
+}
+
+.bannerSlide {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  border-radius: 40px;
+  transition: all 0.5s ease-in-out;
+  overflow: hidden; // border-radius 적용을 위해
+
+  // 중간 슬라이드 (offset === 0) - 크게
+  &.active {
+    width: 32%;
+    height: 100%; // 컨테이너 높이의 100% (정사각형)
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: 2;
+    opacity: 1;
+  }
+  
+  // 왼쪽 슬라이드
+  &.left {
+    width: 28%;
+    height: calc(28% / 32% * 100%); // 가운데 카드 높이의 비율에 맞춤 (정사각형)
+    left: calc(50% - 32% / 2 - 28% - 1.5%); // 가운데 카드 왼쪽
+    top: 50%;
+    transform: translateY(-50%);
+    // opacity: 0.7;
+  }
+  
+  // 오른쪽 슬라이드
+  &.right {
+    width: 28%;
+    height: calc(28% / 32% * 100%); // 가운데 카드 높이의 비율에 맞춤 (정사각형)
+    left: calc(50% + 32% / 2 + 1.5%); // 가운데 카드 오른쪽
+    top: 50%;
+    transform: translateY(-50%);
+    // opacity: 0.7;
+  }
+
+  // 태블릿 (768px ~ 1024px) - 양쪽 슬라이드 크기 조정
+  @media (max-width: 1024px) and (min-width: 769px) {
+    &.active {
+      width: 35%; // 태블릿에서는 중앙을 조금 더 크게
+    }
+
+    &.left,
+    &.right {
+      width: 26%; // 양쪽 슬라이드를 조금 더 크게
+      opacity: 0.6;
+    }
+
+    &.left {
+      left: calc(50% - 35% / 2 - 26% - 1.5%);
+    }
+
+    &.right {
+      left: calc(50% + 35% / 2 + 1.5%);
+    }
+  }
+
+  // 모바일 - 한 번에 하나만 표시
+  @media (max-width: 768px) {
+    border-radius: 20px; // 모바일에서는 더 작은 border-radius
+
+    &.active {
+      width: 90%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &.left,
+    &.right {
+      display: none; // 모바일에서는 양쪽 슬라이드 숨김
+    }
+  }
+}
+
+.bannerContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  border-radius: 40px; // 슬라이드와 동일한 border-radius
+
+  // 태블릿
+  @media (max-width: 1024px) {
+    padding: 1.5rem;
+  }
+
+  // 모바일
+  @media (max-width: 768px) {
+    padding: 1rem;
+    border-radius: 20px;
+  }
+}
+
+.bannerTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  word-break: keep-all; // 단어 단위로 줄바꿈 (한국어에 적합)
+  line-break: auto; // 자연스러운 줄바꿈
+  white-space: normal; // 자동 줄바꿈 허용
+  overflow-wrap: break-word; // 긴 단어가 있을 경우 줄바꿈
+
+  // 태블릿
+  @media (max-width: 1024px) {
+    // font-size: 1rem;
+  }
+
+  // 모바일
+  @media (max-width: 768px) {
+    // font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+}
+
+.bannerSubtitle {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  word-break: keep-all;
+  line-break: auto;
+
+  // 태블릿
+  @media (max-width: 1024px) {
+    font-size: 1rem;
+  }
+
+  // 모바일
+  @media (max-width: 768px) {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.bannerButton {
+  padding: 0.75rem 1.5rem;
+  background: #5558dd;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  
+  &:hover {
+    background: #4447c4;
+  }
+
+  // 태블릿
+  @media (max-width: 1024px) {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+
+  // 모바일
+  @media (max-width: 768px) {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border-radius: 20px;
+  }
+}
+
+.navArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  color: #333;
+  font-size: 24px;
+  
+  &:hover {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  // 오른쪽 화살표 - 배너 컨테이너 바깥에 배치
+  &.navArrowRight {
+    right: -64px; // 배너 바깥으로 이동
+  }
+  
+  // 왼쪽 화살표 - 배너 컨테이너 바깥에 배치
+  &:not(.navArrowRight) {
+    left: -64px; // 배너 바깥으로 이동
+  }
+
+  // 태블릿 - 화살표를 안쪽으로 이동
+  @media (max-width: 1024px) {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+
+    &.navArrowRight {
+      right: 8px;
+    }
+
+    &:not(.navArrowRight) {
+      left: 8px;
+    }
+  }
+
+  // 모바일 - 화살표를 배너 내부에 배치
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    background: rgba(255, 255, 255, 0.8);
+
+    &.navArrowRight {
+      right: 8px;
+    }
+
+    &:not(.navArrowRight) {
+      left: 8px;
+    }
+  }
+}
+
+.pagination {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.paginationDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  
+  &.active {
+    background: white;
+    width: 24px;
+    border-radius: 4px;
+  }
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+}
+

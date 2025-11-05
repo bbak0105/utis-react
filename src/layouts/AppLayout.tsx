@@ -57,28 +57,25 @@ const AppLayout = () => {
         <header className={s.header}>
         {!isMobile ? (
           <>
-            {/* ===== 데스크탑 상단(로고/액션) ===== */}
+            {/* ===== 데스크탑 상단(로고/검색바/액션) ===== */}
             <div className={`${s.top} ${s.container}`}>
-              <div className={s.authLinks}>
-                <NavLink to="/login" className={s.authLink}>로그인</NavLink>
-                <NavLink to="/signup" className={s.authLink}>회원가입</NavLink>
-              </div>
               <NavLink to="/" className={s.logo}>
                 <img src={logoImage} alt="UTIS" className={s.logoImage} />
               </NavLink>
-              <div className={s.actions}>
-                <button aria-label="장바구니" className={s.iconButton}>
-                  <i className="ri-shopping-cart-line"></i>
-                  {cartCount > 0 && (
-                    <span className={s.cartBadge}>{cartCount}</span>
-                  )}
-                </button>
-                <button aria-label="마이" className={s.iconButton}>
-                  <i className="ri-user-line"></i>
-                </button>
-                <button aria-label="검색" className={s.iconButton} onClick={() => setDropdownOpen(!dropdownOpen)}>
+              <div className={s.searchBar}>
+                <input 
+                  type="text" 
+                  placeholder="어디로 여행 가시나요?" 
+                  className={s.searchInput}
+                />
+                <button aria-label="검색" className={s.searchButton}>
                   <i className="ri-search-line"></i>
                 </button>
+              </div>
+              <div className={s.authLinks}>
+                <NavLink to="/login" className={s.authLink}>로그인</NavLink>
+                <NavLink to="/signup" className={s.authLink}>회원가입</NavLink>
+                <NavLink to="/reservation" className={s.authLink}>예약조회</NavLink>
               </div>
             </div>
 
