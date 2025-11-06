@@ -189,18 +189,20 @@ const Travel = () => {
                     <li 
                       key={index} 
                       className={s.rankingItem}
-                      style={{ animationDelay: `${index * 1.6}s` }}
+                      style={{ 
+                        animationDelay: `0s, ${2 + index * 2}s`
+                      }}
                     >
                       <span className={s.rankingNumber}>{index + 1}</span>
                       <span className={s.rankingText}>{item}</span>
                     </li>
                   ))}
                 </ul>
-                <div className={s.sidebarNote}>
+                {/* <div className={s.sidebarNote}>
                   자가 등록한 검색 순위 노출
                   <br />
                   그는 실시간 검색 순위
-                </div>
+                </div> */}
               </div>
             </aside>
 
