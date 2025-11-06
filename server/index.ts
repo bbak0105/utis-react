@@ -11,8 +11,8 @@ app.use(cors({
     'http://travelutis.com',         // 프로덕션 도메인 (HTTP, 필요시)
     'https://www.travelutis.com',    // www 서브도메인 (HTTPS)
     'http://www.travelutis.com',     // www 서브도메인 (HTTP, 필요시)
-    'http://localhost:5173',         // 로컬 개발 환경
-    'http://localhost:3000',         // 로컬 개발 환경 (대체 Never port)
+    // 'http://localhost:5173',         // 로컬 개발 환경
+    // 'http://localhost:3000',         // 로컬 개발 환경 (대체 Never port)
     /\.netlify\.app$/,               // Netlify 미리보기 배포 (Deploy Previews)
   ],
   credentials: true,

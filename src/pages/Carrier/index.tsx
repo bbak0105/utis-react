@@ -39,6 +39,7 @@ const FILTER_OPTIONS = [
 
 const BREADCRUMB_ITEMS = [
   { label: '홈', path: '/' },
+  { label: '여행용품', path: '/travel' },
   { label: '캐리어' }
 ]
 

@@ -5,9 +5,9 @@ import FilterDropdown from '@/components/FilterDropdown'
 import ProductList from '@/components/ProductList'
 import { ProductProps } from '@/components/Product'
 import useScrollAnimation from '@/utils/hooks/useScrollAnimation'
-import s from './Adapter.module.scss'
+import s from './Esim.module.scss'
 
-const SHOWER_PRODUCTS: ProductProps[] = [
+const ESIM_PRODUCTS: ProductProps[] = [
   {
     id: "1",
     name: "여행용 멀티 어댑터 45W 4구",
@@ -40,10 +40,10 @@ const FILTER_OPTIONS = [
 const BREADCRUMB_ITEMS = [
   { label: '홈', path: '/' },
   { label: '여행용품', path: '/travel' },
-  { label: '어댑터' }
+  { label: '이심' }
 ]
 
-const Adapter = () => {
+const Esim = () => {
   const [selectedFilter, setSelectedFilter] = useState('new')
   const titleRef = useScrollAnimation<HTMLHeadingElement>({ threshold: 0.2 })
 
@@ -55,7 +55,7 @@ const Adapter = () => {
           ref={titleRef.ref}
           className={`${s.pageTitle} ${titleRef.isVisible ? s.animateIn : s.animateOut}`}
         >
-          어댑터
+          이심
         </h1>
       </div>
       
@@ -67,7 +67,7 @@ const Adapter = () => {
       {/* Filter Section */}
       <div className={s.filterSection}>
         <div className={s.filterLeft}>
-          <ItemCount count={SHOWER_PRODUCTS.length} />
+          <ItemCount count={ESIM_PRODUCTS.length} />
         </div>
         <div className={s.filterRight}>
           <FilterDropdown 
@@ -79,9 +79,9 @@ const Adapter = () => {
       </div>
       
       {/* Product List */}
-      <ProductList products={SHOWER_PRODUCTS} />
+      <ProductList products={ESIM_PRODUCTS} />
     </div>
   )
 }
 
-export default Adapter
+export default Esim

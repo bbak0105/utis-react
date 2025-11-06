@@ -3,6 +3,9 @@ import { JSX, lazy, Suspense } from 'react'
 import AppLayout from '@/layouts/AppLayout'
 import NotFound from './pages/NotFound'
 import Flights from './pages/Flights'
+import Pillow from './pages/Pillow'
+import Esim from './pages/Esim'
+import Tour from './pages/Tour'
 
 const Home = lazy(() => import('@/pages/Home'))
 const Login = lazy(() => import('@/pages/Login'))
@@ -27,6 +30,9 @@ export const router = createBrowserRouter([
       { path: '/carrier', element: withSuspense(<Carrier />) },
       { path: '/product/:id', element: withSuspense(<ProductDetail />) },
       { path: '/flights', element: withSuspense(<Flights />) },
+      { path: '/pillow', element: withSuspense(<Pillow />) },
+      { path: '/esim', element: withSuspense(<Esim />) },
+      { path: '/tour', element: withSuspense(<Tour />) },
       { path: '*', element: withSuspense(<NotFound/>)}
     ],
   },

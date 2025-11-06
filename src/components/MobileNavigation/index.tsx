@@ -32,25 +32,23 @@ const MobileNavigation = ({ onItemClick, className }: NavigationProps) => {
   }
 
   const navItems: NavItem[] = [
-    { id: 'shower', label: '샤워기', path: '/shower' },
-    { id: 'adapter', label: '어댑터', path: '/adapter' },
     { 
       id: 'travel', 
       label: '여행 용품', 
       path: '/travel',
-      hasNotification: true 
-    },
-    { 
-      id: 'carrier', 
-      label: '캐리어', 
-      path: '/carrier',
       icon: 'ri-arrow-down-s-line',
+      hasNotification: true,
       children: [
-        { id: 'carrier-japan', label: '일본', path: '/carrier/japan' }
+        { id: 'shower', label: '샤워기', path: '/shower' },
+        { id: 'adapter', label: '어댑터', path: '/adapter' },
+        { id: 'carrier', label: '캐리어', path: '/carrier' },
+        { id: 'pillow', label: '목베개', path: '/pillow' },
+        { id: 'esim', label: '이심', path: '/esim' },
       ]
     },
-    { id: 'flights', label: '항공권', path: '/flights' },
-    { id: 'accommodation', label: '숙소', path: '/accommodation' },
+    { id: 'tour', label: '투어/티켓', path: '/tour' },
+    { id: 'flights', label: '항공예약', path: '/flights' },
+    { id: 'accommodation', label: '숙소예약', path: '/accommodation' },
     { 
       id: 'cs', 
       label: '고객센터', 
@@ -75,7 +73,10 @@ const MobileNavigation = ({ onItemClick, className }: NavigationProps) => {
             className={s.navItemWithChildren}
             onClick={() => toggleExpanded(item.id)}
           >
-            <span>{item.label}</span>
+            <span className={s.labelContainer}>
+              {item.label}
+              {item.hasNotification && <span className={s.notificationDot}></span>}
+            </span>
             <i className={`${item.icon} ${isExpanded ? s.expanded : ''}`}></i>
           </div>
           {isExpanded && (

@@ -61,8 +61,6 @@ const FlightsMobile = () => {
                 return date.toISOString().split('T')[0]
             }
 
-            // getCityCode, getTravelClass는 shared 사용
-
             const apiParams: SearchFlightsParams = {
                 origin: getCityCode(searchParams.departureCity),
                 destination: getCityCode(searchParams.arrivalCity),

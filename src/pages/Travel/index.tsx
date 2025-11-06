@@ -2,9 +2,10 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import SliderCards from '@/components/SliderCards'
 import ProductList from '@/components/ProductList'
+import FilterDropdown from '@/components/FilterDropdown'
 import { ProductProps } from '@/components/Product'
 import useBreakpoint from '@/utils/hooks/useBreakpoint'
-import { RiSearchLine, RiHeartLine } from 'react-icons/ri'
+import { RiSearchLine, RiHeartLine, RiArrowRightSLine } from 'react-icons/ri'
 import s from './Travel.module.scss'
 
 // 프로모션 슬라이드 카드 데이터
@@ -28,8 +29,8 @@ const CATEGORIES = [
   { id: 'shower', label: '샤워기', icon: '🚿', path: '/shower' },
   { id: 'adapter', label: '어댑터', icon: '🔌', path: '/adapter' },
   { id: 'carrier', label: '캐리어', icon: '🧳', path: '/carrier' },
-  { id: 'pillow', label: '목베개', icon: '🛏️', path: '/travel' },
-  { id: 'esim', label: '이심', icon: '📱', path: '/travel' }
+  { id: 'pillow', label: '목베개', icon: '🛏️', path: '/pillow' },
+  { id: 'esim', label: '이심', icon: '📱', path: '/esim' }
 ]
 
 // 실시간 검색 순위
@@ -39,6 +40,16 @@ const SEARCH_RANKINGS = [
   '멀티 어댑터',
   '여행용 목베개',
   '압축 파우치'
+]
+
+// 필터 옵션
+const FILTER_OPTIONS = [
+  { value: 'new', label: '신상품' },
+  { value: 'name', label: '상품명' },
+  { value: 'price-low', label: '낮은가격' },
+  { value: 'price-high', label: '높은가격' },
+  { value: 'manufacturer', label: '제조사' },
+  { value: 'reviews', label: '사용후기' }
 ]
 
 // 제품 데이터
@@ -135,6 +146,11 @@ const ADAPTER_PRODUCTS: ProductProps[] = [
 const Travel = () => {
   const { bp } = useBreakpoint()
   const isMobile = bp === 'xs' || bp === 'sm' || bp === 'md'
+  
+  // 각 섹션별 필터 상태 관리
+  const [esimFilter, setEsimFilter] = useState('new')
+  const [carrierFilter, setCarrierFilter] = useState('new')
+  const [adapterFilter, setAdapterFilter] = useState('new')
 
   return (
     <div className={s.container}>
@@ -170,7 +186,11 @@ const Travel = () => {
                 <h3 className={s.sidebarTitle}>실시간 여행용품 검색 순위</h3>
                 <ul className={s.rankingList}>
                   {SEARCH_RANKINGS.map((item, index) => (
-                    <li key={index} className={s.rankingItem}>
+                    <li 
+                      key={index} 
+                      className={s.rankingItem}
+                      style={{ animationDelay: `${index * 1.6}s` }}
+                    >
                       <span className={s.rankingNumber}>{index + 1}</span>
                       <span className={s.rankingText}>{item}</span>
                     </li>
@@ -191,11 +211,15 @@ const Travel = () => {
                 <div className={s.sectionHeader}>
                   <h2 className={s.sectionTitle}>이심</h2>
                   <div className={s.sectionControls}>
-                    <select className={s.sortSelect}>
-                      <option>정렬</option>
-                      <option>추천순</option>
-                    </select>
-                    <button className={s.moreButton}>더보기</button>
+                    <FilterDropdown
+                      options={FILTER_OPTIONS}
+                      selectedValue={esimFilter}
+                      onSelect={setEsimFilter}
+                    />
+                    <button className={s.moreButton}>
+                      더보기
+                      <RiArrowRightSLine className={s.arrowIcon} />
+                    </button>
                   </div>
                 </div>
                 <div className={s.productGrid}>
@@ -230,8 +254,18 @@ const Travel = () => {
               {/* 여행용캐리어 섹션 */}
               <section className={s.productSection}>
                 <div className={s.sectionHeader}>
-                  <h2 className={s.sectionTitle}>여행용캐리어</h2>
-                  <button className={s.moreButton}>더보기</button>
+                  <h2 className={s.sectionTitle}>여행용 캐리어</h2>
+                  <div className={s.sectionControls}>
+                    <FilterDropdown
+                      options={FILTER_OPTIONS}
+                      selectedValue={carrierFilter}
+                      onSelect={setCarrierFilter}
+                    />
+                    <button className={s.moreButton}>
+                      더보기
+                      <RiArrowRightSLine className={s.arrowIcon} />
+                    </button>
+                  </div>
                 </div>
                 <div className={s.productGrid}>
                   {CARRIER_PRODUCTS.map((product) => (
@@ -266,7 +300,17 @@ const Travel = () => {
               <section className={s.productSection}>
                 <div className={s.sectionHeader}>
                   <h2 className={s.sectionTitle}>멀티 어댑터</h2>
-                  <button className={s.moreButton}>더보기</button>
+                  <div className={s.sectionControls}>
+                    <FilterDropdown
+                      options={FILTER_OPTIONS}
+                      selectedValue={adapterFilter}
+                      onSelect={setAdapterFilter}
+                    />
+                    <button className={s.moreButton}>
+                      더보기
+                      <RiArrowRightSLine className={s.arrowIcon} />
+                    </button>
+                  </div>
                 </div>
                 <div className={s.productGrid}>
                   {ADAPTER_PRODUCTS.map((product) => (

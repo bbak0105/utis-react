@@ -10,20 +10,38 @@
 
 .bannerSection {
   margin-bottom: 3rem;
+  display: block; // 마진 collapsing 방지
+  overflow: visible; // 마진이 제대로 적용되도록
+  
+  // SliderCards의 .grid 컨테이너 스타일 조정
+  :global(.grid.container) {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+  }
+  
+  // SliderCards의 .mobileWrap 스타일 조정
+  :global(.mobileWrap) {
+    margin: 0;
+    padding-inline: 0; // 좌우 패딩 제거
+  }
 }
 
 // 카테고리 아이콘 섹션
 .categoriesSection {
-  margin-bottom: 3rem;
-  padding: 0 1rem;
+  margin: 3rem 0;
+  padding: 0 4rem;
+  display: block; // 마진 collapsing 방지
+  overflow: visible; // 마진이 제대로 적용되도록
 }
 
 .categoriesGrid {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   flex-wrap: wrap;
+  max-width: 100%;
 }
 
 .categoryItem {
@@ -114,9 +132,31 @@
   border-radius: 8px;
   transition: background 0.2s ease;
   cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUpFadeInLoop 8s ease-in-out infinite;
 
   &:hover {
     background: #f8f8f8;
+  }
+}
+
+@keyframes slideUpFadeInLoop {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  8% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  92% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
   }
 }
 
@@ -126,12 +166,32 @@
   justify-content: center;
   width: 24px;
   height: 24px;
-  background: #5558dd;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
   color: white;
   border-radius: 50%;
   font-size: 0.875rem;
   font-weight: 600;
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+    border-radius: 50%;
+  }
+  
+  // 텍스트가 위에 표시되도록 z-index 추가
+  span, & {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .rankingText {
@@ -184,20 +244,6 @@
   gap: 1rem;
 }
 
-.sortSelect {
-  padding: 0.5rem 1rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  background: white;
-  cursor: pointer;
-  transition: border-color 0.2s ease;
-
-  &:hover {
-    border-color: #5558dd;
-  }
-}
-
 .moreButton {
   padding: 0.5rem 1rem;
   background: transparent;
@@ -207,11 +253,18 @@
   font-weight: 600;
   cursor: pointer;
   transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 
   &:hover {
     color: #4447c4;
     text-decoration: underline;
   }
+}
+
+.arrowIcon {
+  font-size: 1rem;
 }
 
 // 제품 그리드
@@ -376,8 +429,8 @@
   }
 
   .categoriesSection {
-    margin-bottom: 2rem;
-    padding: 0;
+    margin: 3rem 0;
+    padding: 0 2rem;
   }
 
   .categoriesGrid {
