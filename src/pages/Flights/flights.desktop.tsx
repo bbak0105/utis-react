@@ -369,8 +369,16 @@ const FlightsDesktop = () => {
 
             console.log('검색 파라미터:', searchParams)
             const result: FlightOffersSearchResponse = await searchFlights(searchParams)
-            console.log('검색 결과:', result)
-            setSearchResults(result)
+            console.log('데스크탑 검색 결과:', result)
+            console.log('데스크탑 검색 결과 타입:', typeof result, Array.isArray(result))
+            
+            // API 응답이 배열인 경우 FlightOffersSearchResponse 형태로 변환
+            const formattedResult: FlightOffersSearchResponse = Array.isArray(result)
+                ? { data: result }
+                : result
+            
+            console.log('포맷된 검색 결과:', formattedResult)
+            setSearchResults(formattedResult)
         } catch (error) {
             console.error('Error fetching flights:', error)
             alert('항공권 검색 중 오류가 발생했습니다. 다시 시도해주세요.')

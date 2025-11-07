@@ -39,8 +39,6 @@ const FlightsMobile = () => {
         '호치민', '하노이', '다낭',
         '방콕', '치앙마이', '푸켓'
     ]
-
-    // 헬퍼들은 shared에서 사용
     
     // 검색 함수
     const handleSearch = async () => {
@@ -90,7 +88,15 @@ const FlightsMobile = () => {
             
             const result: FlightOffersSearchResponse = await searchFlights(apiParams)
             console.log('모바일 검색 결과:', result)
-            setSearchResults(result)
+            console.log('모바일 검색 결과 타입:', typeof result, Array.isArray(result))
+            
+            // API 응답이 배열인 경우 FlightOffersSearchResponse 형태로 변환
+            const formattedResult: FlightOffersSearchResponse = Array.isArray(result)
+                ? { data: result }
+                : result
+            
+            console.log('포맷된 검색 결과:', formattedResult)
+            setSearchResults(formattedResult)
         } catch (error) {
             console.error('모바일 검색 에러:', error)
             const errorMessage = error instanceof Error ? error.message : '항공권 검색 중 오류가 발생했습니다.'
