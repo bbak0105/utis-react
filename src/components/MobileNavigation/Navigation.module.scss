@@ -27,21 +27,43 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0;
+  gap: 8px;
+  min-height: 44px; // 일관된 높이 유지
+}
+
+.navLink {
+  flex: 1;
+  display: block;
   padding: 12px 0;
-  cursor: pointer;
+  text-decoration: none;
   color: #333;
   transition: color 0.2s ease;
-  gap: 8px;
   
   &:hover {
     color: #000;
   }
+}
+
+.expandButton {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+  
+  &:hover {
+    color: #333;
+  }
   
   i {
     font-size: 16px;
-    color: #666;
     transition: transform 0.2s ease;
-    flex-shrink: 0;
   }
   
   .expanded {

@@ -4,6 +4,8 @@ import ProductList from '@/components/ProductList'
 import FeatureCards from '@/components/FeatureCards'
 import { ProductProps } from '@/components/Product'
 import useScrollAnimation from '@/utils/hooks/useScrollAnimation'
+import useBreakpoint from '@/utils/hooks/useBreakpoint'
+import { RiSearchLine, RiFocus3Line } from 'react-icons/ri'
 import s from './Home.module.scss'
 
 const BANNER_ITEMS = [
@@ -78,6 +80,8 @@ const BEST_PRODUCTS: ProductProps[] = [
 ]
 
 const Home = () => {
+    const { width } = useBreakpoint()
+    const isSmallMobile = width <= 480
     const travelGoodsRef = useScrollAnimation<HTMLElement>({ threshold: 0.1 })
     const sliderRef = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 })
     const productListRef = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 })
@@ -85,10 +89,37 @@ const Home = () => {
 
     return (
         <div className={s.home}>
-            {/* 메인 배너 */}
-            <div className={s.bannerSection}>
-                <MainBanner items={BANNER_ITEMS} />
-            </div>
+            {isSmallMobile ? (
+                <>
+                    {/* 모바일: 검색창 */}
+                    <div className={s.mobileSearchSection}>
+                        <div className={s.mobileSearchBar}>
+                            <RiSearchLine className={s.searchIcon} />
+                            <input 
+                                type="text" 
+                                placeholder="링톡 이심 30프로 할인중" 
+                                className={s.mobileSearchInput}
+                            />
+                            {/* <RiFocus3Line className={s.targetIcon} /> */}
+                        </div>
+                    </div>
+
+                    {/* 모바일: 정사각형 배너 */}
+                    <div className={s.mobileBannerSection}>
+                        <div className={s.mobileBannerImage}>
+                            <img 
+                                src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1200&h=1200&fit=crop" 
+                                alt="프로모션 배너"
+                            />
+                        </div>
+                    </div>
+                </>
+            ) : (
+                /* 데스크탑: 메인 배너 */
+                <div className={s.bannerSection}>
+                    <MainBanner items={BANNER_ITEMS} />
+                </div>
+            )}
 
             {/* 기존 슬라이드 카드들 */}
             <div 

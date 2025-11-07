@@ -24,7 +24,7 @@ const DesktopNavigation = ({ onItemClick }: DesktopNavigationProps) => {
     { id: 'travel', label: '여행용품', path: '/travel', hasNotification: true },
     { id: 'tour', label: '투어/티켓', path: '/tour' },
     { id: 'flights', label: '항공예약', path: '/flights' },
-    { id: 'accommodation', label: '숙소예약', path: '/accommodation' },
+    // { id: 'accommodation', label: '숙소예약', path: '/accommodation' },
     { id: 'cs', label: '고객센터', path: '/cs' }
   ]
 

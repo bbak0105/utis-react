@@ -190,7 +190,7 @@ const Travel = () => {
                       key={index} 
                       className={s.rankingItem}
                       style={{ 
-                        animationDelay: `0s, ${2 + index * 2}s`
+                        animationDelay: `0s, ${2 + index * 2.4}s`
                       }}
                     >
                       <span className={s.rankingNumber}>{index + 1}</span>

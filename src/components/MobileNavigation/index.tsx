@@ -48,7 +48,7 @@ const MobileNavigation = ({ onItemClick, className }: NavigationProps) => {
     },
     { id: 'tour', label: '투어/티켓', path: '/tour' },
     { id: 'flights', label: '항공예약', path: '/flights' },
-    { id: 'accommodation', label: '숙소예약', path: '/accommodation' },
+    // { id: 'accommodation', label: '숙소예약', path: '/accommodation' },
     { 
       id: 'cs', 
       label: '고객센터', 
@@ -69,15 +69,28 @@ const MobileNavigation = ({ onItemClick, className }: NavigationProps) => {
       
       return (
         <li key={item.id} className={s.navItem}>
-          <div 
-            className={s.navItemWithChildren}
-            onClick={() => toggleExpanded(item.id)}
-          >
-            <span className={s.labelContainer}>
-              {item.label}
-              {item.hasNotification && <span className={s.notificationDot}></span>}
-            </span>
-            <i className={`${item.icon} ${isExpanded ? s.expanded : ''}`}></i>
+          <div className={s.navItemWithChildren}>
+            <NavLink 
+              to={item.path} 
+              onClick={onItemClick}
+              className={s.navLink}
+            >
+              <span className={s.labelContainer}>
+                {item.label}
+                {item.hasNotification && <span className={s.notificationDot}></span>}
+              </span>
+            </NavLink>
+            <button
+              className={s.expandButton}
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                toggleExpanded(item.id)
+              }}
+              aria-label={isExpanded ? '메뉴 접기' : '메뉴 펼치기'}
+            >
+              <i className={`${item.icon} ${isExpanded ? s.expanded : ''}`}></i>
+            </button>
           </div>
           {isExpanded && (
             <ul className={s.subNavList}>
