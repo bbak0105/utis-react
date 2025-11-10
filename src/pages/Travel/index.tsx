@@ -4,7 +4,7 @@ import SliderCards from '@/components/SliderCards'
 import FilterDropdown from '@/components/FilterDropdown'
 import { ProductProps } from '@/components/Product'
 import useBreakpoint from '@/utils/hooks/useBreakpoint'
-import { RiHeartLine, RiArrowRightSLine, RiShoppingCartLine } from 'react-icons/ri'
+import { RiHeartLine, RiArrowRightSLine, RiShoppingCartLine, RiStarFill } from 'react-icons/ri'
 import s from './Travel.module.scss'
 
 interface ExtendedProduct extends ProductProps {
@@ -206,18 +206,18 @@ const Travel = () => {
 
   const mobileSections: MobileSection[] = useMemo(() => ([
     {
-      id: 'carrier',
-      title: 'BEST 여행용 캐리어',
+      id: 'esim',
+      title: '이심',
       badgeLabel: '마트 추천',
-      products: CARRIER_PRODUCTS,
-      moreLink: '/carrier'
+      products: ESIM_PRODUCTS,
+      moreLink: '/esim'
     },
     {
       id: 'golf',
-      title: '🍀 베트남 BEST 골프상품',
+      title: '여행용 캐리어',
       badgeLabel: '마트 추천',
       badgeVariant: 'highlight',
-      products: ESIM_PRODUCTS,
+      products: CARRIER_PRODUCTS,
       moreLink: '/tour'
     },
     {
@@ -338,7 +338,8 @@ const Travel = () => {
                             </span>
                             {product.rating && (
                               <span className={s.productRating}>
-                                ⭐ {product.rating.toFixed(1)} ({product.ratingCount ?? 0})
+                                <RiStarFill className={s.ratingIcon} />
+                                {product.rating.toFixed(1)} ({product.ratingCount ?? 0})
                               </span>
                             )}
                           </div>
@@ -402,7 +403,8 @@ const Travel = () => {
                             </span>
                             {product.rating && (
                               <span className={s.productRating}>
-                                ⭐ {product.rating.toFixed(1)} ({product.ratingCount ?? 0})
+                                <RiStarFill className={s.ratingIcon} />
+                                {product.rating.toFixed(1)} ({product.ratingCount ?? 0})
                               </span>
                             )}
                           </div>
@@ -466,7 +468,8 @@ const Travel = () => {
                             </span>
                             {product.rating && (
                               <span className={s.productRating}>
-                                ⭐ {product.rating.toFixed(1)} ({product.ratingCount ?? 0})
+                                <RiStarFill className={s.ratingIcon} />
+                                {product.rating.toFixed(1)} ({product.ratingCount ?? 0})
                               </span>
                             )}
                           </div>
@@ -524,7 +527,8 @@ const Travel = () => {
                           </span>
                           {product.rating && (
                             <span className={s.mobileRating}>
-                              ⭐ {product.rating.toFixed(1)} ({product.ratingCount ?? 0})
+                              <RiStarFill className={s.ratingIcon} />
+                              {product.rating.toFixed(1)} ({product.ratingCount ?? 0})
                             </span>
                           )}
                         </div>

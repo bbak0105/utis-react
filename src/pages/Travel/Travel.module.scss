@@ -268,26 +268,33 @@
 }
 
 .moreButton {
-  padding: 0.5rem 1rem;
-  background: transparent;
-  border: none;
-  color: #5558dd;
-  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  color: $color-primary;
+  font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
-  transition: color 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
+  transition: all 0.2s ease;
 
   &:hover {
-    color: #4447c4;
-    text-decoration: underline;
+    color: #111827;
+    border-color: #d1d5db;
+    background: #f9fafb;
   }
 }
 
 .arrowIcon {
   font-size: 1rem;
+  transition: transform 0.2s ease;
+
+  .moreButton:hover & {
+    transform: translateX(2px);
+  }
 }
 
 // 제품 그리드
@@ -497,6 +504,11 @@
   gap: 0.25rem;
 }
 
+.ratingIcon {
+  font-size: 1rem;
+  color: #facc15;
+}
+
 // 모바일 콘텐츠
 .mobileContent {
   width: 100%;
@@ -562,7 +574,8 @@
   border-radius: 999px;
   border: 1px solid #e5e7eb;
   background: white;
-  color: #4b5563;
+  // color: #4b5563;
+  color: $color-primary;;
   font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
@@ -668,6 +681,13 @@
   font-size: 0.75rem;
   font-weight: 600;
   color: #4b5563;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+
+  .ratingIcon {
+    font-size: 0.9rem;
+  }
 }
 
 .mobileCardTag {
