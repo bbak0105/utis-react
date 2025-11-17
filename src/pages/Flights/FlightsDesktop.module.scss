@@ -137,6 +137,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .calendarContainer {
@@ -144,6 +145,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   margin-top: 1rem;
+  justify-items: center;
+  align-items: flex-start;
 }
 
 .selectorHeader {
@@ -864,6 +867,17 @@
 
   .cityGrid {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .calendarContainer {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .calendarSelector {
+    align-items: stretch;
   }
 }
 

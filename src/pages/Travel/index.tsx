@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import SliderCards from '@/components/SliderCards'
 import FilterDropdown from '@/components/FilterDropdown'
 import { ProductProps } from '@/components/Product'
@@ -196,6 +196,7 @@ interface MobileSection {
 }
 
 const Travel = () => {
+  const navigate = useNavigate()
   const { bp } = useBreakpoint()
   const isMobile = bp === 'xs' || bp === 'sm' || bp === 'md'
   
@@ -218,7 +219,7 @@ const Travel = () => {
       badgeLabel: '마트 추천',
       badgeVariant: 'highlight',
       products: CARRIER_PRODUCTS,
-      moreLink: '/tour'
+      moreLink: '/carrier'
     },
     {
       id: 'adapter',
@@ -295,7 +296,10 @@ const Travel = () => {
                       selectedValue={esimFilter}
                       onSelect={setEsimFilter}
                     />
-                    <button className={s.moreButton}>
+                    <button 
+                      className={s.moreButton}
+                      onClick={() => navigate('/esim')}
+                    >
                       더보기
                       <RiArrowRightSLine className={s.arrowIcon} />
                     </button>
@@ -360,7 +364,10 @@ const Travel = () => {
                       selectedValue={carrierFilter}
                       onSelect={setCarrierFilter}
                     />
-                    <button className={s.moreButton}>
+                    <button 
+                      className={s.moreButton}
+                      onClick={() => navigate('/carrier')}
+                    >
                       더보기
                       <RiArrowRightSLine className={s.arrowIcon} />
                     </button>
@@ -412,7 +419,7 @@ const Travel = () => {
                       </div>
                     </div>
                   ))}
-                </div>
+        </div>
               </section>
 
               {/* 멀티 어댑터 섹션 */}
@@ -420,12 +427,15 @@ const Travel = () => {
                 <div className={s.sectionHeader}>
                   <h2 className={s.sectionTitle}>멀티 어댑터</h2>
                   <div className={s.sectionControls}>
-                    <FilterDropdown
-                      options={FILTER_OPTIONS}
+          <FilterDropdown 
+            options={FILTER_OPTIONS}
                       selectedValue={adapterFilter}
                       onSelect={setAdapterFilter}
                     />
-                    <button className={s.moreButton}>
+                    <button 
+                      className={s.moreButton}
+                      onClick={() => navigate('/adapter')}
+                    >
                       더보기
                       <RiArrowRightSLine className={s.arrowIcon} />
                     </button>
@@ -499,7 +509,10 @@ const Travel = () => {
                       </span>
                     )}
                   </div>
-                  <button className={s.mobileMoreButton}>
+                  <button 
+                    className={s.mobileMoreButton}
+                    onClick={() => navigate(section.moreLink || '/esim')}
+                  >
                     더보기
                     <RiArrowRightSLine />
                   </button>
@@ -543,7 +556,7 @@ const Travel = () => {
                 </div>
               </section>
             ))}
-          </div>
+        </div>
         )}
       </div>
     </div>

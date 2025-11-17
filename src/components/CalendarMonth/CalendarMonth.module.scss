@@ -7,6 +7,15 @@
     padding: 1.5rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     border: 1px solid #f1f5f9;
+    width: min(100%, 360px);
+    margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+    .calendarWrapper {
+        padding: 1.25rem;
+        width: min(100%, 340px);
+    }
 }
 
 .calendarHeader {
@@ -152,9 +161,11 @@
         background: #fef3c7;
         color: #92400e;
         font-weight: 600;
-        
+        box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.25);
+
         &:hover {
             background: #fde68a;
+            box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.35);
         }
     }
 

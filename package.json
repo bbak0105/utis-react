@@ -21,6 +21,7 @@
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "korean-lunar-calendar": "^0.3.6",
+    "lottie-react": "^2.4.1",
     "react": "^19.1.1",
     "react-datepicker": "^8.8.0",
     "react-dom": "^19.1.1",

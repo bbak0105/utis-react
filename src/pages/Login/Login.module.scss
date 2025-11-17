@@ -1,0 +1,441 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/tokens' as *;
+
+.loginPage {
+  min-height: 100vh;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2rem;
+}
+
+// 헤더
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  position: relative;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.backButton,
+.homeButton {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #1d1d1f;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+
+  &:hover {
+    background: #f5f5f5;
+    border-radius: 50%;
+  }
+}
+
+.pageTitle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin: 0;
+}
+
+// 프로모션 배너
+.promoBanner {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  margin: 1.5rem 1.25rem;
+  border-radius: 12px;
+  padding: 1.25rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.promoContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.promoText {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1d1d1f;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.pointBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: #fbbf24;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.promoIllustration {
+  flex-shrink: 0;
+  position: relative;
+  width: 80px;
+  height: 60px;
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.couponCard {
+  position: relative;
+  background: #fbbf24;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+
+  span:first-child {
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: #1d1d1f;
+    white-space: nowrap;
+  }
+
+  .downloadIcon {
+    font-size: 0.75rem;
+    color: #1d1d1f;
+  }
+}
+
+.envelope::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #dc2626;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 85%, 0 70%);
+  z-index: 1;
+}
+
+// 탭
+.tabs {
+  display: flex;
+  margin: 0 1.25rem 1.5rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 0.25rem;
+  gap: 0.25rem;
+}
+
+.tab {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &.active {
+    background: #374151;
+    color: white;
+    font-weight: 600;
+  }
+}
+
+// 로그인 폼
+.loginForm {
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inputGroup {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 0.875rem 0;
+  border: none;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 1rem;
+  color: #1d1d1f;
+  background: transparent;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: #9ca3af;
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom-color: $color-primary;
+  }
+}
+
+// 보안접속 토글
+.secureToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.toggleLabel {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.toggleInput {
+  opacity: 0;
+  width: 0;
+  height: 0;
+
+  &:checked + .toggleSlider {
+    background: #dc2626;
+
+    &::before {
+      transform: translateX(20px);
+    }
+  }
+}
+
+.toggleSlider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #d1d5db;
+  border-radius: 28px;
+  transition: background 0.3s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+}
+
+.toggleText {
+  font-size: 0.875rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+// 로그인 버튼
+.loginButton {
+  width: 100%;
+  padding: 1rem;
+  background: #374151;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+
+  &:hover:not(:disabled) {
+    background: #1f2937;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(55, 65, 81, 0.3);
+  }
+
+  &:disabled {
+    background: #d1d5db;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+// 소셜 로그인
+.socialLogin {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.kakaoButton {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: #fee500;
+  color: #000000;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  &:hover {
+    background: #fdd835;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(254, 229, 0, 0.3);
+  }
+}
+
+.kakaoIcon {
+  font-size: 1.25rem;
+  color: #000000;
+}
+
+.phoneButton {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: white;
+  color: #374151;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  &:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.phoneIcon {
+  font-size: 1.25rem;
+  color: #374151;
+}
+
+// 유틸리티 링크
+.utilityLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.link {
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.divider {
+  color: #d1d5db;
+  font-size: 0.875rem;
+}
+
+// 하단 안내
+.footerMessage {
+  margin-top: auto;
+  padding: 2rem 1.25rem 1rem;
+  text-align: center;
+}
+
+.footerTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin: 0 0 0.5rem 0;
+}
+
+.footerText {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+// 데스크탑 반응형
+@media (min-width: 768px) {
+  .loginPage {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .header {
+    padding: 1.5rem 0;
+    border-bottom: none;
+  }
+
+  .promoBanner {
+    margin: 2rem 0 2rem;
+    padding: 1.5rem;
+  }
+
+  .promoText {
+    font-size: 1rem;
+  }
+
+  .tabs {
+    margin: 0 0 2rem;
+  }
+
+  .loginForm {
+    padding: 0;
+  }
+
+  .footerMessage {
+    padding: 2rem 0 0;
+  }
+}
+

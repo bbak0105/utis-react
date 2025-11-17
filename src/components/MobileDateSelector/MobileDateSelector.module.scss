@@ -222,9 +222,10 @@
   }
 
   &.today {
-    background: rgba(85, 88, 221, 0.1);
-    color: $button-primary;
+    background: #fef3c7;
+    color: #92400e;
     font-weight: 600;
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.3);
   }
 
   &.past {

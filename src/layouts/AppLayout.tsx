@@ -75,7 +75,7 @@ const AppLayout = () => {
               <div className={s.authLinks}>
                 <NavLink to="/login" className={s.authLink}>로그인</NavLink>
                 <NavLink to="/signup" className={s.authLink}>회원가입</NavLink>
-                <NavLink to="/reservation" className={s.authLink}>예약조회</NavLink>
+                {/* <NavLink to="/reservation" className={s.authLink}>예약조회</NavLink> */}
               </div>
             </div>
 
@@ -136,7 +136,7 @@ const AppLayout = () => {
                   <span className={s.cartBadge}>{cartCount}</span>
                 )}
               </button>
-              <button aria-label="검색" className={s.iconButton}>
+              <button aria-label="검색" className={`${s.iconButton} ${s.searchButton}`}>
                 <i className="ri-search-line"></i>
               </button>
             </div>

@@ -401,6 +401,15 @@
   gap: 12px;
 }
 
+// 모바일 검색 버튼 숨기기 (480px 이하)
+@media (max-width: 480px) {
+  .mobileActions {
+    .searchButton {
+      display: none;
+    }
+  }
+}
+
 // 메인 콘텐츠
 .main {
   min-height: 100dvh;
