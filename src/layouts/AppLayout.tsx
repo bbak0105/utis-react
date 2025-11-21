@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Outlet, NavLink, useLocation } from 'react-router-dom'
+import { Outlet, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import useBreakpoint from '@/utils/hooks/useBreakpoint'
 import Drawer from '@/components/Drawer'
 import MobileNavigation from '@/components/MobileNavigation'
@@ -16,6 +16,7 @@ const AppLayout = () => {
   const [cartCount, setCartCount] = useState(3) // 장바구니 카운터 상태 (테스트용)
   const [isHeaderHidden, setIsHeaderHidden] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
   
   // ProductDetail 페이지에서 스크롤에 따라 헤더 숨기기
   const isProductDetail = location.pathname.startsWith('/product/')
@@ -157,8 +158,24 @@ const AppLayout = () => {
 
           {/* 간단한 유저 카드/버튼 영역 */}
           <div className={s.userActions}>
-            <button className={s.userButton}>로그아웃</button>
-            <button className={s.userButton}>마이페이지</button>
+            <button 
+              className={s.userButton}
+              onClick={() => {
+                navigate('/login')
+                setOpen(false)
+              }}
+            >
+              로그인
+            </button>
+            <button 
+              className={s.userButton}
+              onClick={() => {
+                navigate('/signup')
+                setOpen(false)
+              }}
+            >
+              회원가입
+            </button>
           </div>
 
           {/* 네비 목록 */}

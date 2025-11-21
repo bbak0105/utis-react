@@ -81,6 +81,60 @@ const PRODUCT_OPTIONS: ProductOption[] = [
   }
 ]
 
+const BUNDLED_PRODUCTS = [
+  {
+    id: 'bundle-1',
+    name: '퓨어리 여행용 샤워 필터',
+    price: 16500,
+    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    brand: 'PURELY'
+  },
+  {
+    id: 'bundle-2',
+    name: '여행용 실리콘 공병 세트',
+    price: 8900,
+    image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    brand: 'TRAVELER'
+  },
+  {
+    id: 'bundle-3',
+    name: '휴대용 섬유향수 3종',
+    price: 12900,
+    image: 'https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    brand: 'SCENT'
+  }
+]
+
+const PURCHASE_GUIDE_SECTIONS = [
+  {
+    id: 'payment',
+    title: '상품 결제정보',
+    description: [
+      '고액결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다. 확인과정에서 도난 카드의 사용이나 타인 명의의 주문 등 정상적인 주문이 아니라고 판단될 경우 임의로 주문을 보류 또는 취소할 수 있습니다.',
+      '무통장 입금은 상품 구매 대금을 PC뱅킹, 인터넷뱅킹, 텔레뱅킹 혹은 가까운 은행에서 직접 입금하시면 됩니다. 주문시 입력한 입금자명과 실제입금자의 성명이 반드시 일치하여야 하며, 7일 이내로 입금을 하셔야 하며 입금되지 않은 주문은 자동취소 됩니다.'
+    ]
+  },
+  {
+    id: 'shipping',
+    title: '배송안내',
+    description: [
+      '배송 방법 : 택배',
+      '배송 지역 : 전국지역',
+      '배송 비용 : 일부 상품 무료 / 조건부 무료',
+      '배송 기간 : 2일 ~ 7일',
+      '배송 안내 : 산간벽지나 도서지방은 별도의 추가금액을 지불하셔야 하는 경우가 있습니다.'
+    ]
+  },
+  {
+    id: 'exchange',
+    title: '교환 및 반품안내',
+    description: [
+      '교환 및 반품이 가능한 경우 상품을 공급 받으신 날로부터 7일이내 단, 가전제품의 경우 포장을 개봉하였거나 포장이 훼손되어 상품가치가 상실된 경우에는 교환/반품이 불가능합니다.',
+      '교환 및 반품이 불가능한 경우 고객님의 책임 있는 사유로 상품등이 멸실 또는 훼손된 경우.'
+    ]
+  }
+]
+
 const ProductDetail = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [selectedOptions, setSelectedOptions] = useState({
@@ -92,6 +146,7 @@ const ProductDetail = () => {
   const [activeSection, setActiveSection] = useState('detail')
   const [showFooter, setShowFooter] = useState(false)
   const [isInfoPanelVisible, setIsInfoPanelVisible] = useState(true)
+  const [openGuideId, setOpenGuideId] = useState<string | null>(PURCHASE_GUIDE_SECTIONS[0].id)
   
   const navRef = useRef<HTMLDivElement>(null)
   const sectionsRef = useRef<{ [key: string]: HTMLElement | null }>({
@@ -306,6 +361,25 @@ const ProductDetail = () => {
         </nav>
       </div>
 
+      {/* Bundled Products */}
+      <section className={s.bundleSection}>
+        <h2 className={s.bundleTitle}>함께 구매한 상품</h2>
+        <div className={s.bundleList}>
+          {BUNDLED_PRODUCTS.map((product) => (
+            <article key={product.id} className={s.bundleCard}>
+              <div className={s.bundleImage}>
+                <img src={product.image} alt={product.name} />
+              </div>
+              <div className={s.bundleInfo}>
+                <span className={s.bundleBrand}>{product.brand}</span>
+                <p className={s.bundleName}>{product.name}</p>
+                <p className={s.bundlePrice}>{product.price.toLocaleString()}원</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       {/* Sticky Navigation */}
       {isNavSticky && (
         <div className={s.stickyNav}>
@@ -354,8 +428,26 @@ const ProductDetail = () => {
         {/* 구매안내 섹션 */}
         <section ref={(el) => { sectionsRef.current.guide = el }} className={s.section}>
           <h2>구매안내</h2>
-          <div className={s.sectionContent}>
-            <p>구매 방법과 배송 안내가 여기에 표시됩니다.</p>
+          <div className={s.guideAccordion}>
+            {PURCHASE_GUIDE_SECTIONS.map((item) => {
+              const isOpen = openGuideId === item.id
+              return (
+                <article key={item.id} className={`${s.guideItem} ${isOpen ? s.open : ''}`}>
+                  <button
+                    className={s.guideHeader}
+                    onClick={() => setOpenGuideId(isOpen ? null : item.id)}
+                  >
+                    <span>{item.title}</span>
+                    <i className={`ri-arrow-up-s-line ${s.guideArrow}`}></i>
+                  </button>
+                  <div className={s.guideBody}>
+                    {item.description.map((line, idx) => (
+                      <p key={idx}>{line}</p>
+                    ))}
+                  </div>
+                </article>
+              )
+            })}
           </div>
         </section>
 
