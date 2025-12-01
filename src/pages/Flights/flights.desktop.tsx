@@ -673,7 +673,7 @@ const FlightsDesktop = () => {
                 >
                     항공권 검색
                 </h1>
-            </div>
+        </div>
 
             {/* 티켓 컨테이너 */}
             <div className={styles.ticketContainer}>

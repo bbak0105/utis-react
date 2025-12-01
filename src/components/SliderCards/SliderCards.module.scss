@@ -33,6 +33,71 @@
   }
 }
 
+.paginationControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 8px 16px;
+  background: white;
+  // border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #1f2937;
+  font-size: 20px;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: #5558dd;
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.pageInfo {
+  @include font-normal(sm);
+  color: #1f2937;
+  min-width: 50px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.gridButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #1f2937;
+  font-size: 20px;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: #5558dd;
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
 .card {
   height: 200px;
   position: relative;

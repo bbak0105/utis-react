@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Breadcrumb from '@/components/Breadcrumb'
 import ProductOptions, { ProductOption } from '@/components/ProductOptions'
+import { RiStarFill, RiStarLine, RiSearchLine, RiArrowDownSLine } from 'react-icons/ri'
 import s from './ProductDetail.module.scss'
 
 const PRODUCT = {
@@ -135,6 +136,78 @@ const PURCHASE_GUIDE_SECTIONS = [
   }
 ]
 
+// 리뷰 데이터
+const REVIEW_DATA = {
+  averageRating: 5.0,
+  totalReviews: 867,
+  ratingDistribution: [
+    { stars: 5, percentage: 98 },
+    { stars: 4, percentage: 1 },
+    { stars: 3, percentage: 1 },
+    { stars: 2, percentage: 0 },
+    { stars: 1, percentage: 0 }
+  ],
+  photoReviews: [
+    {
+      id: 'photo-1',
+      image: 'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=400',
+      rating: 5,
+      text: '방학 기념으로 오사카 여행 가면서 큐알캐리어...',
+      userId: '신**'
+    },
+    {
+      id: 'photo-2',
+      image: 'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=400',
+      rating: 5,
+      text: '친구랑 같이 노랑색, 분홍색 26인치 캐리어 주문...',
+      userId: '김**'
+    },
+    {
+      id: 'photo-3',
+      image: 'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=400',
+      rating: 5,
+      text: '효도여행시켜준다고 딸이 주문해준 캐리어랑 베트...',
+      userId: '장**'
+    },
+    {
+      id: 'photo-4',
+      image: 'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=400',
+      rating: 5,
+      text: '강아지들이랑 3박4일제 주가면 한짐이라서 캐리...',
+      userId: '이**'
+    },
+    {
+      id: 'photo-5',
+      image: 'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=400',
+      rating: 5,
+      text: '고민했던게 후회되요..무조건 사야해요 실물이...',
+      userId: 'J__'
+    }
+  ],
+  reviews: [
+    {
+      id: 'review-1',
+      rating: 5,
+      userId: '신**',
+      text: '방학 기념으로 오사카 여행 가면서 큐알캐리어 샀는데 진짜 후회없는 선택이었어요! 파스텔 색상이 너무 예쁘고 깔끔한 디자인이라 여행 갈 때마다 기분이 좋아져요. 손잡이가 넓어서 짐이 무거워도 손목에 부담이 없고, 360도 회전하는 바퀴 덕분에 좁은 골목길이나 지하철역에서도 자유롭게 이동할 수 있었어요. 비가 많이 왔는데 커버 덕분에 짐이 전혀 젖지 않았고, 재질도 튼튼해서 여행 다니면서도 깨끗하게 유지됐어요.',
+      images: [
+        'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=400',
+        'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=400',
+        'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=400'
+      ]
+    },
+    {
+      id: 'review-2',
+      rating: 5,
+      userId: '김**',
+      text: '친구랑 같이 노랑색, 분홍색 26인치 캐리어 주문했는데 색상이 정말 예뻐요! 짐 찾을 때도 한눈에 알아볼 수 있어서 편했어요. 내부 수납공간도 깔끔하게 정리되어 있고 넓어서 필요한 것들 다 넣을 수 있었어요. 바퀴가 정말 부드러워서 다른 캐리어보다 훨씬 끌기 편했고, 여행 중에 가장 만족스러운 구매였어요.',
+      images: [
+        'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=400'
+      ]
+    }
+  ]
+}
+
 const ProductDetail = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [selectedOptions, setSelectedOptions] = useState({
@@ -147,8 +220,11 @@ const ProductDetail = () => {
   const [showFooter, setShowFooter] = useState(false)
   const [isInfoPanelVisible, setIsInfoPanelVisible] = useState(true)
   const [openGuideId, setOpenGuideId] = useState<string | null>(PURCHASE_GUIDE_SECTIONS[0].id)
+  const [sortOption, setSortOption] = useState('recommended')
+  const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false)
   
   const navRef = useRef<HTMLDivElement>(null)
+  const sortDropdownRef = useRef<HTMLDivElement>(null)
   const sectionsRef = useRef<{ [key: string]: HTMLElement | null }>({
     detail: null,
     guide: null,
@@ -204,6 +280,23 @@ const ProductDetail = () => {
     
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // 드롭다운 외부 클릭 시 닫기
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sortDropdownRef.current && !sortDropdownRef.current.contains(event.target as Node)) {
+        setIsSortDropdownOpen(false)
+      }
+    }
+
+    if (isSortDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isSortDropdownOpen])
 
   // 섹션으로 스크롤 이동
   const scrollToSection = (sectionId: string) => {
@@ -452,10 +545,146 @@ const ProductDetail = () => {
         </section>
 
         {/* 구매후기 섹션 */}
-        <section ref={(el) => { sectionsRef.current.review = el }} className={s.section}>
-          <h2>구매후기</h2>
-          <div className={s.sectionContent}>
-            <p>고객들의 구매 후기가 여기에 표시됩니다.</p>
+        <section ref={(el) => { sectionsRef.current.review = el }} className={s.reviewSection}>
+          {/* 리뷰 상단 헤더 */}
+          <div className={s.reviewHeader}>
+            <h2 className={s.reviewTitle}>리뷰</h2>
+            <p className={s.reviewSubtitle}>고객님의 소중한 후기를 남겨주세요.</p>
+          </div>
+
+          {/* 리뷰 요약 섹션 */}
+          <div className={s.reviewSummary}>
+            <div className={s.reviewSummaryLeft}>
+              <div className={s.satisfactionBox}>
+                <h3 className={s.satisfactionTitle}>상품만족도</h3>
+                <div className={s.ratingDisplay}>
+                  <span className={s.ratingStars}>★</span>
+                  <span className={s.ratingValue}>{REVIEW_DATA.averageRating}</span>
+                  <span className={s.ratingMax}>/5</span>
+                </div>
+                <p className={s.reviewCount}>{REVIEW_DATA.totalReviews} 개의 리뷰가 있습니다.</p>
+                <button className={s.writeReviewButton}>리뷰 작성하기</button>
+              </div>
+            </div>
+            <div className={s.reviewSummaryRight}>
+              <div className={s.ratingDistribution}>
+                {REVIEW_DATA.ratingDistribution.map((item) => (
+                  <div key={item.stars} className={s.ratingBarItem}>
+                    <span className={s.ratingBarLabel}>{item.stars}점</span>
+                    <div className={s.ratingBarContainer}>
+                      <div 
+                        className={`${s.ratingBar} ${item.percentage > 0 ? s.ratingBarActive : ''}`}
+                        style={{ width: `${item.percentage}%` }}
+                      ></div>
+                    </div>
+                    <span className={s.ratingBarPercentage}>{item.percentage}%</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* 포토 리뷰 섹션 */}
+          <div className={s.photoReviewsSection}>
+            <div className={s.photoReviewsScroll}>
+              {REVIEW_DATA.photoReviews.map((review) => (
+                <div key={review.id} className={s.photoReviewCard}>
+                  <div className={s.photoReviewImage}>
+                    <img src={review.image} alt="리뷰 이미지" />
+                  </div>
+                  <div className={s.photoReviewStars}>
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <RiStarFill key={i} className={s.starIcon} />
+                    ))}
+                  </div>
+                  <p className={s.photoReviewText}>{review.text}</p>
+                  <span className={s.photoReviewUserId}>{review.userId}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 리뷰 목록 헤더 */}
+          <div className={s.reviewListHeader}>
+            <h3 className={s.reviewListTitle}>리뷰 {REVIEW_DATA.totalReviews}</h3>
+            <div className={s.reviewListFilters}>
+              <button className={s.filterButton}>포토/동영상 리뷰 모아보기</button>
+              <div className={s.sortDropdownContainer} ref={sortDropdownRef}>
+                <button 
+                  className={s.sortDropdownButton}
+                  onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
+                >
+                  {sortOption === 'recommended' && '추천순'}
+                  {sortOption === 'latest' && '최신순'}
+                  {sortOption === 'rating' && '별점 높은 순'}
+                  <RiArrowDownSLine className={`${s.dropdownIcon} ${isSortDropdownOpen ? s.rotated : ''}`} />
+                </button>
+                {isSortDropdownOpen && (
+                  <div className={s.sortDropdownMenu}>
+                    <button 
+                      className={`${s.sortDropdownItem} ${sortOption === 'recommended' ? s.active : ''}`}
+                      onClick={() => {
+                        setSortOption('recommended')
+                        setIsSortDropdownOpen(false)
+                      }}
+                    >
+                      추천순
+                    </button>
+                    <button 
+                      className={`${s.sortDropdownItem} ${sortOption === 'latest' ? s.active : ''}`}
+                      onClick={() => {
+                        setSortOption('latest')
+                        setIsSortDropdownOpen(false)
+                      }}
+                    >
+                      최신순
+                    </button>
+                    <button 
+                      className={`${s.sortDropdownItem} ${sortOption === 'rating' ? s.active : ''}`}
+                      onClick={() => {
+                        setSortOption('rating')
+                        setIsSortDropdownOpen(false)
+                      }}
+                    >
+                      별점 높은 순
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className={s.reviewListFilterDropdown}>
+            <button className={s.dropdownButton}>
+              별점 <RiArrowDownSLine />
+            </button>
+          </div>
+
+          {/* 리뷰 목록 */}
+          <div className={s.reviewList}>
+            {REVIEW_DATA.reviews.map((review) => (
+              <div key={review.id} className={s.reviewCard}>
+                <div className={s.reviewCardHeader}>
+                  <div className={s.reviewStars}>
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <RiStarFill key={i} className={s.starIcon} />
+                    ))}
+                  </div>
+                  <span className={s.reviewUserId}>{review.userId}</span>
+                </div>
+                <p className={s.reviewText}>{review.text}</p>
+                {review.images && review.images.length > 0 && (
+                  <div className={s.reviewImages}>
+                    {review.images.map((img, idx) => (
+                      <img key={idx} src={img} alt={`리뷰 이미지 ${idx + 1}`} />
+                    ))}
+                  </div>
+                )}
+                <div className={s.reviewActions}>
+                  <button className={s.reviewActionLink}>접기 ^</button>
+                  <button className={s.reviewActionLink}>0 신고·차단</button>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 

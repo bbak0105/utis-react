@@ -13,6 +13,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-table": "^8.21.3",
     "@types/react-datepicker": "^6.2.0",
     "amadeus": "^11.0.0",
     "classnames": "^2.5.1",

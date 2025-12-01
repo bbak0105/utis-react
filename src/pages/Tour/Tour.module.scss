@@ -1,0 +1,497 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/tokens' as *;
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+  background: white;
+}
+
+// 히어로 배너
+.heroBanner {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-image: url('https://images.unsplash.com/photo-1499678329028-101435549a4e?w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.7) 0%, rgba(118, 75, 162, 0.7) 50%, rgba(240, 147, 251, 0.7) 100%);
+  }
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.heroTitle {
+  @include font-bold(5xl);
+  color: white;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+// 검색 바
+.searchBar {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+}
+
+.searchRow {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  background: white;
+  border-radius: 12px;
+  padding: 0.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+  // FilterDropdown 스타일 조정
+  :global(.dropdown) {
+    flex-shrink: 0;
+  }
+
+  :global(.dropdownButton) {
+    min-width: 100px;
+    padding: 0.875rem 1rem;
+    height: auto;
+  }
+}
+
+.searchInputWrapper {
+  flex: 1;
+  position: relative;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: none;
+  border-radius: 8px;
+  @include font-normal(base);
+  color: #1f2937;
+  background: #f9fafb;
+  outline: none;
+  transition: background 0.2s ease;
+  height: 100%;
+
+  &::placeholder {
+    color: #9ca3af;
+  }
+
+  &:focus {
+    background: white;
+  }
+}
+
+.searchDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.searchDropdownHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+
+  span {
+    @include font-semibold(sm);
+    color: #1f2937;
+  }
+}
+
+.deleteHistoryButton {
+  @include font-normal(xs);
+  color: #6b7280;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.searchSection {
+  margin-bottom: 1.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sectionTitle {
+  @include font-semibold(sm);
+  color: #4b5563;
+  margin-bottom: 0.75rem;
+}
+
+.searchItems {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.searchItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  @include font-normal(sm);
+  color: #1f2937;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #f9fafb;
+  }
+
+  .searchIcon {
+    font-size: 1rem;
+    color: #6b7280;
+    flex-shrink: 0;
+  }
+}
+
+.searchButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: $button-primary;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  @include font-semibold(sm);
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+
+  &:hover {
+    background: $button-primary-hover;
+  }
+
+  svg {
+    font-size: 1.25rem;
+  }
+}
+
+// 프로모션 섹션
+.bannerSection {
+  margin-bottom: 3rem;
+  padding: 0 2rem;
+  display: block;
+  overflow: visible;
+
+  :global(.grid.container) {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+  }
+
+  :global(.mobileWrap) {
+    margin: 0;
+    padding-inline: 0;
+  }
+}
+
+// 인기 상품 섹션
+.productsSection {
+  padding: 0 2rem 3rem;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.sectionTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sectionTitle {
+  @include font-bold(2xl);
+  color: #1f2937;
+  margin: 0;
+}
+
+.titleIcon {
+  font-size: 1.5rem;
+  color: $color-primary;
+}
+
+.sectionControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.productCard {
+  background: white;
+  border-radius: 18px;
+  overflow: visible;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 48px rgba(15, 23, 42, 0.12);
+  }
+}
+
+.productImage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #f5f5f5;
+  border-radius: 12px 12px 0 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .productCard:hover & img {
+    transform: scale(1.05);
+  }
+}
+
+.productTag {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.productTag_purple {
+  background: #4f46e5;
+  color: white;
+}
+
+.productTag_pink {
+  background: #db2777;
+  color: white;
+}
+
+.productTag_green {
+  background: #047857;
+  color: white;
+}
+
+.productActions {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 2;
+}
+
+.productCard:hover .productActions {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.productActionButton {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.94);
+  border: none;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+
+  svg {
+    font-size: 1.15rem;
+    color: #4b5563;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 24px rgba(15, 23, 42, 0.18);
+    background: white;
+
+    svg {
+      color: #111827;
+    }
+  }
+}
+
+.productInfo {
+  padding: 1rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.productLocation {
+  @include font-normal(xs);
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.productName {
+  @include font-semibold(base);
+  color: #111827;
+  margin: 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.8em;
+}
+
+.productRating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  @include font-normal(sm);
+  color: #4b5563;
+
+  .ratingIcon {
+    font-size: 1rem;
+    color: #facc15;
+  }
+}
+
+.productPrice {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.originalPrice {
+  @include font-normal(sm);
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+
+.discountRate {
+  @include font-semibold(sm);
+  color: #db2777;
+  background: rgba(251, 113, 133, 0.15);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+
+.discountedPrice {
+  @include font-bold(xl);
+  color: #111827;
+  margin-top: 0.25rem;
+}
+
+// 반응형
+@media (max-width: 768px) {
+  .heroBanner {
+    height: 300px;
+    margin-bottom: 2rem;
+  }
+
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .searchRow {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .searchButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .bannerSection {
+    padding: 0 1rem;
+  }
+
+  .productsSection {
+    padding: 0 1rem 2rem;
+  }
+
+  .productGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+

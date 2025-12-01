@@ -19,6 +19,7 @@ const Adapter = lazy(() => import('@/pages/Adapter'))
 const Travel = lazy(() => import('@/pages/Travel'))
 const Carrier = lazy(() => import('@/pages/Carrier'))
 const ProductDetail = lazy(() => import('@/pages/ProductDetail'))
+const CustomerService = lazy(() => import('@/pages/CustomerService'))
 
 const withSuspense = (el: JSX.Element) => (
   <Suspense 
@@ -57,6 +58,11 @@ export const router = createBrowserRouter([
       { path: '/pillow', element: withSuspense(<Pillow />) },
       { path: '/esim', element: withSuspense(<Esim />) },
       { path: '/tour', element: withSuspense(<Tour />) },
+      { path: '/cs', element: withSuspense(<CustomerService />) },
+      { path: '/cs/notice', element: withSuspense(<CustomerService />) },
+      { path: '/cs/event', element: withSuspense(<CustomerService />) },
+      { path: '/cs/inquiry', element: withSuspense(<CustomerService />) },
+      { path: '/cs/review', element: withSuspense(<CustomerService />) },
       { path: '*', element: withSuspense(<NotFound/>)}
     ],
   },

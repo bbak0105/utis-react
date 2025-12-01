@@ -1,0 +1,281 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/tokens' as *;
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 2rem 4rem;
+  background: white;
+}
+
+.breadcrumbContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+.pageTitle {
+  @include font-bold(3xl);
+  color: #1f2937;
+  text-align: center;
+  margin: 0 0 2rem 0;
+}
+
+// 탭 네비게이션
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.tab {
+  padding: 1rem 2rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  @include font-normal(base);
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: -2px;
+
+  &:hover {
+    color: #1f2937;
+  }
+
+  &.active {
+    color: $color-primary;
+    border-bottom-color: $color-primary;
+    font-weight: 600;
+  }
+}
+
+// 테이블
+.tableContainer {
+  margin-bottom: 2rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.tableHeader {
+  padding: 1rem;
+  background: #f9fafb;
+  @include font-semibold(sm);
+  color: #1f2937;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+
+  &:first-child {
+    width: 80px;
+    text-align: center;
+  }
+
+  &:nth-child(2) {
+    // 제목 컬럼은 더 넓게
+  }
+
+  &:nth-child(3),
+  &:nth-child(4),
+  &:nth-child(5) {
+    width: 120px;
+    text-align: center;
+  }
+}
+
+.tableRow {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #f9fafb;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.tableCell {
+  padding: 1rem;
+  @include font-normal(sm);
+  color: #1f2937;
+  text-align: left;
+
+  &:first-child {
+    text-align: center;
+    color: #6b7280;
+  }
+
+  &:nth-child(3),
+  &:nth-child(4),
+  &:nth-child(5) {
+    text-align: center;
+    color: #6b7280;
+  }
+}
+
+.titleLink {
+  background: none;
+  border: none;
+  @include font-normal(sm);
+  color: #1f2937;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $color-primary;
+    text-decoration: underline;
+  }
+}
+
+// 검색/필터 섹션
+.searchSection {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.searchFilters {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  @include font-normal(sm);
+  color: #1f2937;
+  background: white;
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: #9ca3af;
+  }
+
+  &:focus {
+    border-color: $color-primary;
+  }
+}
+
+.searchButton {
+  padding: 0.5rem 1.5rem;
+  background: $button-primary;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  @include font-semibold(sm);
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+
+  &:hover {
+    background: $button-primary-hover;
+  }
+}
+
+// 페이지네이션
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.paginationButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #6b7280;
+
+  &:hover:not(:disabled) {
+    background: #f9fafb;
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  svg {
+    font-size: 1rem;
+  }
+}
+
+.pageNumber {
+  padding: 0 1rem;
+  @include font-semibold(base);
+  color: #1f2937;
+  min-width: 40px;
+  text-align: center;
+}
+
+// 반응형
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 1rem 2rem;
+  }
+
+  .pageTitle {
+    font-size: 1.5rem;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tab {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .tableContainer {
+    overflow-x: auto;
+  }
+
+  .table {
+    min-width: 600px;
+  }
+
+  .searchFilters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchInput {
+    width: 100%;
+  }
+
+  .searchButton {
+    width: 100%;
+  }
+}
+

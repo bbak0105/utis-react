@@ -30,16 +30,16 @@
 // 카테고리 아이콘 섹션
 .categoriesSection {
   margin: 3rem 0;
-  padding: 0 4rem;
+  padding: 0 2rem;
   display: block; // 마진 collapsing 방지
   overflow: visible; // 마진이 제대로 적용되도록
 }
 
 .categoriesGrid {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 4rem;
   flex-wrap: wrap;
   max-width: 100%;
 }
@@ -77,8 +77,7 @@
 }
 
 .categoryLabel {
-  font-size: 0.875rem;
-  font-weight: 500;
+  @include font-semibold(sm);
   color: #666;
 }
 
@@ -308,7 +307,7 @@
   background: white;
   border-radius: 18px;
   overflow: visible;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  // box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
   transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
   cursor: pointer;
   display: flex;
@@ -618,13 +617,12 @@
   flex: 0 0 var(--mobile-card-width);
   background: white;
   border-radius: 16px;
-  // border: 1px solid $chip-border-white;
-  // box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  border: 1px solid $chip-border-white;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  // box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
 }
 
 .mobileCardImage {
